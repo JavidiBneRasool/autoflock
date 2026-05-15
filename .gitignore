@@ -1,3 +1,4 @@
 config/social.json
 config/google_indexing_key.json
 config/cloudflare.json
+logs/
