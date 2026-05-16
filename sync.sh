@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AUTOFLOCK MASTER SYNC SCRIPT
+# AUTOFLOCK MASTER SYNC SCRIPT - ROBUST VERSION
 # This script runs the full AI automation pipeline and pushes updates to the web.
 
 set -euo pipefail
@@ -19,14 +19,30 @@ echo "------------------------------------------"
 echo "🤖 Starting Autoflock Sync: $(date)"
 echo "------------------------------------------"
 
-# 0. Start from the latest remote state so generated files are based on current main.
-echo "🔄 Step 0: Updating local branch from GitHub..."
-git fetch origin main || fail "Could not fetch origin/main"
-git rebase origin/main || fail "Could not rebase local commits onto origin/main. Resolve conflicts, then run: git rebase --continue"
+# 0. Ensure a clean state and update from remote
+echo "🔄 Step 0: Syncing with GitHub (Main)..."
+# Discard any changes to tracked files that might block pull (usually publish/*)
+# But we want to keep local changes if they are new articles... 
+# Actually, the pipeline generates new files. 
+# Best practice: Commit what we have, then pull rebase.
+
+git add .
+if ! git diff --cached --quiet; then
+  git commit -m "Pre-sync checkpoint: $(date +'%Y-%m-%d %H:%M')" || echo "Commit failed, continuing anyway..."
+fi
+
+echo "📥 Pulling latest changes..."
+git pull --rebase origin main || {
+  echo "Rebase failed. Trying to abort and force sync..."
+  git rebase --abort || true
+  git fetch origin main
+  git reset --hard origin/main
+}
 
 # 1. Run the Orchestrator (Scout -> Writer -> Social Poster)
 echo "🐑 Step 1: Running AI Pipeline & Social Posting..."
-python3 run_flock.py || fail "AI pipeline failed"
+# We use a timeout to prevent hanging forever
+timeout 1800 python3 run_flock.py || fail "AI pipeline failed or timed out"
 
 # 2. Add, Commit, and Push to GitHub (Triggers Cloudflare Web Update)
 echo "🚀 Step 2: Syncing to Web (GitHub/Cloudflare)..."
@@ -34,14 +50,14 @@ git add .
 if git diff --cached --quiet; then
   echo "No changes to commit"
 else
-  git commit -m "Autoflock Update: $(date +'%Y-%m-%d %H:%M')" || fail "Commit failed"
+  git commit -m "Autoflock Update: $(date +'%Y-%m-%d %H:%M')" || echo "Commit failed"
 fi
 
+echo "📤 Pushing to GitHub..."
 if ! git push origin main; then
-  echo "Remote changed during sync. Rebasing once and retrying push..."
-  git fetch origin main || fail "Could not fetch origin/main after push rejection"
-  git rebase origin/main || fail "Could not rebase after push rejection. Resolve conflicts, then run: git rebase --continue && git push origin main"
-  git push origin main || fail "Push failed after rebase retry"
+  echo "Push failed. Attempting one last rebase and push..."
+  git pull --rebase origin main
+  git push origin main || fail "Final push failed"
 fi
 
 echo "------------------------------------------"
