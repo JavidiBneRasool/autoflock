@@ -2,3 +2,12 @@ config/social.json
 config/google_indexing_key.json
 config/cloudflare.json
 logs/
+output/
+history.json
+trans_history.json
+*.log
+__pycache__/
+.DS_Store
+publish/translations.json
+publish/sitemap.xml
+publish/news-sitemap.xml
