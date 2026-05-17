@@ -1,0 +1,45 @@
+name: 🤖 Autoflock Autonomous Cycle
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Every hour (at the start of the hour)
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write # 👈 Crucial: Grants GitHub Actions permission to run 'git push'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install Dependencies
+        run: pip install feedparser requests
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+      - name: 🔧 Inject Social Config
+        env:
+          SOCIAL_JSON: ${{ secrets.SOCIAL_JSON }} # 👈 Safely handles JSON quotes
+        run: |
+          mkdir -p config
+          echo "$SOCIAL_JSON" > config/social.json
+
+      - name: 🐑 Run AI Pipeline
+        run: python3 auto_flock.py # 👈 Changed to match your local Termux file
+
+      - name: 🚀 Commit & Push Changes
+        run: |
+          git config --global user.name "Autoflock Bot"
+          git config --global user.email "bot@autoflock.ai"
+          git add .
+          git commit -m "🤖 Autonomous Update: $(date)" || echo "No changes to commit"
+          git push
+          
