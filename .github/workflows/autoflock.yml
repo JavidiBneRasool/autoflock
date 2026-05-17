@@ -36,7 +36,9 @@ jobs:
         run: find . -name "*.sh" -exec chmod +x {} \;
 
       - name: 🐑 Run AI Pipeline
-        run: python3 auto_flock.py # 👈 Changed to match your local Termux file
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python3 auto_flock.py
 
       - name: 🚀 Commit & Push Changes
         run: |
