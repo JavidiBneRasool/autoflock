@@ -9,117 +9,72 @@ POSTED_FILE = f"{OUTPUT}/social_posted.json"
 BASE_URL = "https://autoflock.cutbar.in"
 TRACKING_PARAMS = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid", "ref"}
 
-
 def load_config():
     with open(f"{PROJECT}/config/social.json") as f:
         return json.load(f)
 
-
 def _canonical_url(url):
-    if not url:
-        return ""
+    if not url: return ""
     parts = urlsplit(url.strip())
     query = urlencode([(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if k.lower() not in TRACKING_PARAMS])
     path = parts.path.rstrip('/') or '/'
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, query, ''))
 
-
 def _title_key(title):
     title = re.sub(r"[^a-z0-9 ]+", " ", (title or "").lower())
     return re.sub(r"\s+", " ", title).strip()
 
-
 def _article_url(article):
     filename = article.get("filename", "")
-    if filename:
-        return f"{BASE_URL}/{filename.replace('.html', '')}"
-    # If publishing did not run, prefer the original source over repeatedly posting the homepage.
+    if filename: return f"{BASE_URL}/{filename}"
     return article.get("source_url") or article.get("url") or BASE_URL
 
-
 def _load_posted():
-    if not os.path.exists(POSTED_FILE):
-        return []
+    if not os.path.exists(POSTED_FILE): return []
     try:
-        with open(POSTED_FILE) as f:
-            return json.load(f)
-    except Exception:
-        return []
-
+        with open(POSTED_FILE) as f: return json.load(f)
+    except: return []
 
 def _load_published_articles():
-    # Sheep 8 runs before Sheep 10, so history.json has filenames. This avoids homepage-only posts.
     try:
         with open(HISTORY_FILE) as f:
-            history = json.load(f)
-            if history:
-                return history
-    except Exception:
-        pass
-    try:
-        with open(f"{OUTPUT}/sheep7_audited.json") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        try:
-            with open(f"{OUTPUT}/sheep1_basket.json") as f:
-                articles = json.load(f)
-                for article in articles:
-                    article.setdefault("headline", article.get("title", ""))
-                return articles
-        except FileNotFoundError:
-            return []
+            h = json.load(f)
+            if h: return h
+    except: pass
+    return []
 
+def generate_curiosity_hook(headline, category, source):
+    # Curiosity Hook Logic: Why this matters + Bullet Points
+    clean_h = headline.split(":", 1)[-1].split("—")[0].strip()
+    return f"""🧠 SIGNAL: {clean_h}
+
+Why this matters:
+• Strategic pivot in {category} detected.
+• Potential market ripple effect from {source}.
+• Expert deep-dive inside.
+
+Full Intelligence Report 👇"""
 
 def post_to_telegram(bot_token, channel_id, headline, article_url, category, source):
-    post_text = f"""
-🤖 <b>{category} Update</b>
-
-<b>{headline}</b>
-
-Source: {source}
-🔗 {article_url}
-
-#Autoflock #AI #Terminal #Automation
-"""
+    hook = generate_curiosity_hook(headline, category, source)
+    post_text = f"<b>{hook}</b>\n🔗 {article_url}\n\n#Autoflock #AI #Intelligence"
     api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-    payload = {"chat_id": channel_id, "text": post_text, "parse_mode": "HTML", "disable_web_page_preview": False}
+    payload = {"chat_id": channel_id, "text": post_text, "parse_mode": "HTML"}
     try:
-        response = requests.post(api_url, json=payload)
-        return response.json().get("ok"), response.json().get("description", "unknown")
-    except Exception as e:
-        return False, str(e)
+        r = requests.post(api_url, json=payload); return r.json().get("ok"), "ok"
+    except Exception as e: return False, str(e)
 
-
-def post_to_whatsapp(instance_id, access_token, phone_number, headline, article_url):
-    url = f"https://api.ultramsg.com/{instance_id}/messages/chat"
-    message = f"*🤖 {headline}*\n\nRead more: {article_url}\n\n#Autoflock #AI"
-    payload = {"token": access_token, "to": phone_number, "body": message}
-    try:
-        response = requests.post(url, data=payload)
-        return response.status_code == 200, response.text
-    except Exception as e:
-        return False, str(e)
-
-
-def post_to_facebook(page_id, access_token, headline, article_url, category):
-    triggers = [
-        f"🚀 {category} signal: {headline}",
-        f"🤖 New Autoflock intelligence: {headline}",
-        f"⚡ Developer and automation watch: {headline}",
-        f"🔧 Practical AI signal: {headline}"
-    ]
-    message = f"🤖 {headline}\n\n{random.choice(triggers)}\n\nRead more: {article_url}\n\n#Autoflock #AI #Automation"
+def post_to_facebook(page_id, access_token, headline, article_url, category, source):
+    hook = generate_curiosity_hook(headline, category, source)
+    message = f"{hook}\nRead more: {article_url}\n\n#Autoflock #AI #Automation"
     api_url = f"https://graph.facebook.com/{page_id}/feed"
     payload = {"message": message, "link": article_url, "access_token": access_token}
     try:
-        response = requests.post(api_url, data=payload)
-        return response.status_code == 200, response.text
-    except Exception as e:
-        return False, str(e)
-
+        r = requests.post(api_url, data=payload); return r.status_code == 200, "ok"
+    except Exception as e: return False, str(e)
 
 def run():
-    print("🐑 SHEEP 10: Posting to Multi-Channel Social Hub...")
+    print("🐑 SHEEP 10: Posting Analyst Hooks to Social Hub...")
     config = load_config()
     bot_token = config.get("telegram_bot_token")
     channel_id = config.get("telegram_channel_id")
@@ -131,67 +86,47 @@ def run():
 
     articles = _load_published_articles()
     if not articles:
-        print("🐑 SHEEP 10: No articles!")
-        return None
+        print("🐑 SHEEP 10: No articles!"); return None
 
     posted = _load_posted()
-    posted_urls = {_canonical_url(item.get("source_url", "")) for item in posted if item.get("source_url")}
-    posted_titles = {_title_key(item.get("headline", "")) for item in posted if item.get("headline")}
+    posted_urls = {_canonical_url(item.get("source_url", "")) for item in posted}
+    posted_titles = {_title_key(item.get("headline", "")) for item in posted}
 
-    results = []
     selected = []
-    for article in articles:
-        headline = article.get("headline") or article.get("title") or ""
-        source_url = _canonical_url(article.get("source_url") or article.get("url") or "")
-        title_key = _title_key(headline)
-        if source_url in posted_urls or title_key in posted_titles:
-            continue
-        if not article.get("filename") and not source_url:
-            continue
-        selected.append(article)
-        posted_urls.add(source_url)
-        posted_titles.add(title_key)
-        if len(selected) == 3:
-            break
+    for a in articles:
+        h = a.get("headline") or a.get("title") or ""
+        su = _canonical_url(a.get("source_url") or a.get("url") or "")
+        tk = _title_key(h)
+        if su in posted_urls or tk in posted_titles: continue
+        selected.append(a)
+        posted_urls.add(su); posted_titles.add(tk)
+        if len(selected) == 2: break
 
     if not selected:
-        print("🐑 SHEEP 10: No new social posts to send ✓")
-        return []
+        print("🐑 SHEEP 10: No new social signals to send ✓"); return []
 
-    for article in selected:
-        headline = article.get("headline") or article.get("title")
-        article_url = _article_url(article)
-        category = article.get("category", "Tech")
-        source = article.get("source", "Autoflock")
-        source_url = article.get("source_url") or article.get("url") or ""
-        print(f"   Social Post: {headline[:50]}...")
+    results = []
+    for a in selected:
+        h = a.get("headline") or a.get("title")
+        au = _article_url(a)
+        cat = a.get("category", "Tech")
+        src = a.get("source", "Autoflock")
+        print(f"   Posting Hook: {h[:50]}...")
 
-        sent_any = False
+        sent = False
         if bot_token and channel_id:
-            ok, err = post_to_telegram(bot_token, channel_id, headline, article_url, category, source)
-            sent_any = sent_any or bool(ok)
-            print("      ✓ Posted to Telegram" if ok else f"      ✗ Telegram Failed: {err}")
+            ok, _ = post_to_telegram(bot_token, channel_id, h, au, cat, src)
+            sent = sent or ok
         if fb_page_id and fb_access_token:
-            ok, err = post_to_facebook(fb_page_id, fb_access_token, headline, article_url, category)
-            sent_any = sent_any or bool(ok)
-            print("      ✓ Posted to Facebook" if ok else f"      ✗ Facebook Failed: {err}")
-        if wa_instance and wa_token:
-            ok, err = post_to_whatsapp(wa_instance, wa_token, wa_number, headline, article_url)
-            sent_any = sent_any or bool(ok)
-            print("      ✓ Posted to WhatsApp" if ok else f"      ✗ WhatsApp Failed: {err}")
+            ok, _ = post_to_facebook(fb_page_id, fb_access_token, h, au, cat, src)
+            sent = sent or ok
+        
+        res = {"headline": h, "url": au, "success": sent}
+        results.append(res); posted.insert(0, res)
+        time.sleep(5)
 
-        result = {"headline": headline, "url": article_url, "source_url": source_url, "success": sent_any}
-        results.append(result)
-        posted.insert(0, result)
-        time.sleep(3)
-
-    posted = posted[:300]
-    with open(POSTED_FILE, "w") as f:
-        json.dump(posted, f, indent=2)
-    with open(f"{OUTPUT}/sheep10_social.json", "w") as f:
-        json.dump(results, f, indent=2)
-
-    print("🐑 SHEEP 10: Social updates completed ✓")
+    with open(POSTED_FILE, "w") as f: json.dump(posted[:300], f, indent=2)
+    print("🐑 SHEEP 10: Digital Analyst Social Feed updated ✓")
     return results
 
 if __name__ == "__main__":

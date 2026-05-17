@@ -24,6 +24,8 @@ SHEEP = [
     ("Sheep 9 (Reporter)", "sheep9/reporter.py"),
     ("Sheep 10 (Social)", "sheep10/social_poster.py"),
     ("Sheep 12 (Indexer)", "sheep12/indexer.py"),
+    ("Sheep 14 (SEO)", "sheep14_seo.py"),
+    ("Sheep 15 (GSC Indexer)", "sheep15_gsc.py"),
 ]
 
 print("""
