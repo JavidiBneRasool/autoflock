@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-PROJECT_DIR="/data/data/com.termux/files/home/projects/media/autoflock"
+PROJECT_DIR="$(pwd)"
 cd "$PROJECT_DIR"
 
 fail() {
@@ -64,3 +64,10 @@ echo "------------------------------------------"
 echo "✅ SYNC COMPLETE: Your AI tools are live!"
 echo "🌐 URL: https://autoflock.cutbar.in"
 echo "------------------------------------------"
+
+# Keep only latest 150 article files
+if [ -d "$PROJECT_DIR/publish" ]; then
+  cd "$PROJECT_DIR/publish"
+  ls -t *.html 2>/dev/null | grep -v index.html | tail -n +151 | xargs rm -f 2>/dev/null || true
+  cd "$PROJECT_DIR"
+fi
