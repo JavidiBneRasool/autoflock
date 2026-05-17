@@ -37,9 +37,9 @@ jobs:
 
       - name: 🚀 Commit & Push Changes
         run: |
-          git config --global user.name "Autoflock Bot"
-          git config --global user.email "bot@autoflock.ai"
+          git config --global user.name "AutoFlock Agent"
+          git config --global user.email "agent @autoflock.cutbar.in"
           git add .
-          git commit -m "🤖 Autonomous Update: $(date)" || echo "No changes to commit"
+          git commit -m "🤖 AutoFlock Intelligence Sync: $(date)" || echo "No changes to commit"
           git push
           
