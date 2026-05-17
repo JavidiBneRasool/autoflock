@@ -121,11 +121,44 @@
         </div>
     </div>
 
-    <footer>
-        <div class="logo-text f-logo">Auto <span>Flock</span></div>
-        <p style="color: var(--text-dim)">Autonomous Journalism for the Agentic Era</p>
-        <div class="legal">
-            🤖 Engine: Auto Flock Agent • Domain: <a href="https://autoflock.cutbar.in" style="color: var(--accent-secondary); text-decoration: none; font-weight: 700;">autoflock.cutbar.in</a> • &copy; 2026
+    <footer class="ai-footer">
+        <style>
+            .ai-footer {
+                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
+                font-family: 'Space Grotesk', sans-serif; text-align: center;
+            }
+            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
+            .ai-footer-logo span { color: #0ff; }
+            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
+            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
+        </style>
+        <div class="ai-footer-logo">Auto <span>Flock</span></div>
+        <p class="ai-footer-text">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
+        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
+    </footer>
+    
+<script>
+    function toggleMode() {
+        const body = document.body;
+        const btn = document.getElementById('mode-btn');
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        localStorage.setItem('flock-theme', isLight ? 'light' : 'dark');
+        btn.innerText = isLight ? '☀️' : '🌙';
+    }
+
+    function initMode() {
+        const theme = localStorage.getItem('flock-theme') || 'dark';
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+            document.getElementById('mode-btn').innerText = '☀️';
+        }
+    }
+    window.onload = initMode;
+</script>
+
+</body>
+</html>or: var(--accent-secondary); text-decoration: none; font-weight: 700;">autoflock.cutbar.in</a> • &copy; 2026
         </div>
         <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-glow);">
             <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">Autoflock Network</p>
