@@ -36,7 +36,4 @@ if __name__ == "__main__":
     print("🚀 Autoflock 1-Hour Automation Started.")
     print(f"📝 Logging to: {LOG_FILE}")
     
-    while True:
-        run_sync()
-        print("⏳ Sleeping for 1 hour (3600s)...")
-        time.sleep(3600)
+    run_sync()
