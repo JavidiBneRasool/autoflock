@@ -3,161 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Flock | AI & Terminal Intelligence</title>
-    
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-
+    <title>Auto Flock | AI Intelligence Hub</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="bg-canvas">
-        <div class="orb" style="top: 10%; left: 10%; width: 400px; height: 400px; background: var(--accent-primary);"></div>
-        <div class="orb" style="bottom: 10%; right: 10%; width: 300px; height: 300px; background: var(--accent-secondary);"></div>
-    </div>
-
-    <header>
-        <a href="/" class="logo-wrap">
-            <div class="logo-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+<body class="dark-theme">
+    
+    <header class="ai-header">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+            .ai-header {
+                position: sticky; top: 0; z-index: 9999; width: 100%;
+                background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+                font-family: 'Space Grotesk', sans-serif;
+            }
+            .ai-header-content {
+                max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem;
+                display: flex; justify-content: space-between; align-items: center;
+            }
+            .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
+            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+            .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
+            .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+            .ai-status-pill {
+                padding: 0.35rem 0.75rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 100px; font-size: 0.7rem; color: #fff; font-weight: 500;
+                display: flex; align-items: center; gap: 0.5rem;
+            }
+            @media (max-width: 640px) { .ai-tagline { display: none; } }
+        </style>
+        <div class="ai-header-content">
+            <a href="/" class="ai-logo">
+                <div class="ai-logo-text">Auto <span>Flock</span></div>
+                <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
+            </a>
+            <div class="ai-status-pill">
+                <span style="color: #0ff;">🟢</span> Engine: Auto Flock Agent
             </div>
-            <div class="logo-text">Auto <span>Flock</span></div>
-        </a>
-        <div class="nav-actions">
-            <button class="mode-toggle" id="mode-btn" onclick="toggleMode()">🌙</button>
         </div>
     </header>
 
     <div class="container">
-        <div style="text-align: center; margin-bottom: 5rem;">
-            <div class="tag" style="margin-bottom: 1rem; color: var(--accent-primary)">System Operational</div>
-            <h1 style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; letter-spacing: -2px; line-height: 0.9;">
-                Autonomous <br><span style="color: var(--accent-primary)">AI Signals</span>
-            </h1>
-        </div>
-
         <div class="pro-grid">
             
+            <div class="pro-card" onclick="window.location.href='ai-equipped-drones-study-dolphins-on-the-edge-of-extinction.html'">
+                <div class="tag">AI Business</div>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: AI-equipped drones study dolphins on the edge of extinction — Analysis</h3>
+                <p>🔮 SIGNAL: AI-equipped drones study dolphins on the edge of extinction — Analysis
+
+Auto Flock Senior Analyst | May 17, 2026...</p>
+                <div class="card-foot">
+                    <span>Microsoft AI Blog</span>
+                </div>
+            </div>
+            <div class="pro-card" onclick="window.location.href='online-math-tutoring-service-uses-ai-to-help-boost-students-skills-an.html'">
+                <div class="tag">AI Business</div>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Online math tutoring service uses AI to help boost students’ skills an — Strategy</h3>
+                <p>📈 OPPORTUNITY: Online math tutoring service uses AI to help boost students’ skills an — Strategy
+
+Auto Flock Senior Analyst | May 17, 2026...</p>
+                <div class="card-foot">
+                    <span>Microsoft AI Blog</span>
+                </div>
+            </div>
             <div class="pro-card" onclick="window.location.href='20260517-224704-1.html'">
                 <div class="tag">AI Business</div>
-                <h3>📈 OPPORTUNITY: If you’re giving a commencement speech in 2026, maybe don’t mention AI — Strategy</h3>
-                <p>📈 OPPORTUNITY: If you’re giving a commencement speech in 2026, maybe don’t mention AI — Strategy  Auto Flock Intelligenc...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: If you’re giving a commencement speech in 2026, maybe don’t mention AI — Strategy</h3>
+                <p>📈 OPPORTUNITY: If you’re giving a commencement speech in 2026, maybe don’t mention AI — Strategy
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>TechCrunch AI</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-224704-2.html'">
                 <div class="tag">AI Business</div>
-                <h3>🚨 WARNING: TechCrunch Mobility: The AI skills arms race is coming for automotive — Risk Report</h3>
-                <p>🚨 WARNING: TechCrunch Mobility: The AI skills arms race is coming for automotive — Risk Report  Auto Flock Intelligence ...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: TechCrunch Mobility: The AI skills arms race is coming for automotive — Risk Report</h3>
+                <p>🚨 WARNING: TechCrunch Mobility: The AI skills arms race is coming for automotive — Risk Report
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>TechCrunch AI</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-224704-3.html'">
                 <div class="tag">Terminal/Dev</div>
-                <h3>🔮 SIGNAL: What are you doing this weekend? — Analysis</h3>
-                <p>🔮 SIGNAL: What are you doing this weekend? — Analysis  Auto Flock Intelligence | May 17, 2026  ---   🔮 The Intelligence ...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: What are you doing this weekend? — Analysis</h3>
+                <p>🔮 SIGNAL: What are you doing this weekend? — Analysis
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>Lobsters Programming</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-224704-4.html'">
                 <div class="tag">Automation/Sec</div>
-                <h3>📈 OPPORTUNITY: The First CVE Wave: Signs That AI-Assisted Vulnerability Discovery Is  — Strategy</h3>
-                <p>📈 OPPORTUNITY: The First CVE Wave: Signs That AI-Assisted Vulnerability Discovery Is  — Strategy  Auto Flock Intelligenc...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: The First CVE Wave: Signs That AI-Assisted Vulnerability Discovery Is  — Strategy</h3>
+                <p>📈 OPPORTUNITY: The First CVE Wave: Signs That AI-Assisted Vulnerability Discovery Is  — Strategy
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>Lobsters Security</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-211821-1.html'">
                 <div class="tag">Terminal/Dev</div>
-                <h3>📈 OPPORTUNITY: Continuous AI for accessibility: How GitHub transforms feedback into i — Strategy</h3>
-                <p>📈 OPPORTUNITY: Continuous AI for accessibility: How GitHub transforms feedback into i — Strategy  Auto Flock Intelligenc...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Continuous AI for accessibility: How GitHub transforms feedback into i — Strategy</h3>
+                <p>📈 OPPORTUNITY: Continuous AI for accessibility: How GitHub transforms feedback into i — Strategy
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>GitHub Engineering</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-211821-2.html'">
                 <div class="tag">Automation/Sec</div>
-                <h3>🚨 WARNING: Announcing Cloudflare Account Abuse Protection: prevent fraudulent att — Risk Report</h3>
-                <p>🚨 WARNING: Announcing Cloudflare Account Abuse Protection: prevent fraudulent att — Risk Report  Auto Flock Intelligence...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: Announcing Cloudflare Account Abuse Protection: prevent fraudulent att — Risk Report</h3>
+                <p>🚨 WARNING: Announcing Cloudflare Account Abuse Protection: prevent fraudulent att — Risk Report
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>Cloudflare Security</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-211821-3.html'">
                 <div class="tag">Automation/Sec</div>
-                <h3>🔮 SIGNAL: AI Security for Apps is now generally available — Analysis</h3>
-                <p>🔮 SIGNAL: AI Security for Apps is now generally available — Analysis  Auto Flock Intelligence | May 17, 2026  ---   🔮 Th...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: AI Security for Apps is now generally available — Analysis</h3>
+                <p>🔮 SIGNAL: AI Security for Apps is now generally available — Analysis
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>Cloudflare Security</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-211821-4.html'">
                 <div class="tag">Automation/Sec</div>
-                <h3>📈 OPPORTUNITY: NGINX CVE-2026-42945 Exploited in the Wild, Causing Worker Crashes and — Strategy</h3>
-                <p>📈 OPPORTUNITY: NGINX CVE-2026-42945 Exploited in the Wild, Causing Worker Crashes and — Strategy  Auto Flock Intelligenc...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: NGINX CVE-2026-42945 Exploited in the Wild, Causing Worker Crashes and — Strategy</h3>
+                <p>📈 OPPORTUNITY: NGINX CVE-2026-42945 Exploited in the Wild, Causing Worker Crashes and — Strategy
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>The Hacker News AI</span>
-                    <span>May 17, 2026</span>
                 </div>
             </div>
             <div class="pro-card" onclick="window.location.href='20260517-211821-5.html'">
                 <div class="tag">Terminal/Dev</div>
-                <h3>🚨 WARNING: Scientists believe ibogaine can help veterans overcome PTSD — Risk Report</h3>
-                <p>🚨 WARNING: Scientists believe ibogaine can help veterans overcome PTSD — Risk Report  Auto Flock Intelligence | May 17, ...</p>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: Scientists believe ibogaine can help veterans overcome PTSD — Risk Report</h3>
+                <p>🚨 WARNING: Scientists believe ibogaine can help veterans overcome PTSD — Risk Report
+
+Auto Flock Intelligence | May 17, 2026...</p>
                 <div class="card-foot">
                     <span>Hacker News</span>
-                    <span>May 17, 2026</span>
+                </div>
+            </div>
+            <div class="pro-card" onclick="window.location.href='20260517-211821-6.html'">
+                <div class="tag">Terminal/Dev</div>
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: Hindenburg's Smoking Room — Analysis</h3>
+                <p>🔮 SIGNAL: Hindenburg's Smoking Room — Analysis
+
+Auto Flock Intelligence | May 17, 2026...</p>
+                <div class="card-foot">
+                    <span>Hacker News</span>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="logo-text f-logo">Auto <span>Flock</span></div>
-        <p style="color: var(--text-dim)">Autonomous Journalism for the Agentic Era</p>
-        <div class="legal">
-            🤖 Engine: Auto Flock Agent • Domain: <a href="https://autoflock.cutbar.in" style="color: var(--accent-secondary); text-decoration: none; font-weight: 700;">autoflock.cutbar.in</a> • &copy; 2026
-        </div>
-        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-glow);">
-            <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">Autoflock Network</p>
-            <a href="https://autoflock.cutbar.in" target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 12px; border: 1px solid rgba(255,51,68,0.2); transition: var(--transition);">
-                <div style="width: 30px; height: 30px; background: #00ff88; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 0.8rem;">AF</div>
-                <div style="text-align: left;">
-                    <div style="color: white; font-weight: 800; font-size: 0.9rem;">Auto <span>Flock</span></div>
-                    <div style="color: #666; font-size: 0.6rem;">AI & Terminal Intelligence Hub</div>
-                </div>
-            </a>
-        </div>
-    </footer>
     
-<script>
-    function toggleMode() {
-        const body = document.body;
-        const btn = document.getElementById('mode-btn');
-        body.classList.toggle('light-mode');
-        const isLight = body.classList.contains('light-mode');
-        localStorage.setItem('flock-theme', isLight ? 'light' : 'dark');
-        btn.innerText = isLight ? '☀️' : '🌙';
-    }
-
-    function initMode() {
-        const theme = localStorage.getItem('flock-theme') || 'dark';
-        if (theme === 'light') {
-            document.body.classList.add('light-mode');
-            document.getElementById('mode-btn').innerText = '☀️';
-        }
-    }
-    window.onload = initMode;
-</script>
+    <footer class="ai-footer">
+        <style>
+            .ai-footer {
+                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
+                font-family: 'Space Grotesk', sans-serif; text-align: center;
+            }
+            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
+            .ai-footer-logo span { color: #0ff; }
+            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
+            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
+        </style>
+        <div class="ai-footer-logo">Auto <span>Flock</span></div>
+        <p class="ai-footer-text">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
+        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
+    </footer>
 
 </body>
 </html>
