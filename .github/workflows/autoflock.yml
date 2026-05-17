@@ -21,7 +21,7 @@ jobs:
           python-version: '3.10'
 
       - name: 📦 Install Dependencies
-        run: pip install feedparser requests
+        run: pip install feedparser requests beautifulsoup4 lxml ccxt google-generativeai
         env:
           FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
@@ -32,13 +32,16 @@ jobs:
           mkdir -p config
           echo "$SOCIAL_JSON" > config/social.json
 
+      - name: 🔑 Make scripts executable
+        run: find . -name "*.sh" -exec chmod +x {} \;
+
       - name: 🐑 Run AI Pipeline
         run: python3 auto_flock.py # 👈 Changed to match your local Termux file
 
       - name: 🚀 Commit & Push Changes
         run: |
           git config --global user.name "AutoFlock Agent"
-          git config --global user.email "agent @autoflock.cutbar.in"
+          git config --global user.email "agent@autoflock.cutbar.in"
           git add .
           git commit -m "🤖 AutoFlock Intelligence Sync: $(date)" || echo "No changes to commit"
           git push
