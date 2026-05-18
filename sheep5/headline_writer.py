@@ -41,7 +41,7 @@ def get_image_url(headline, category, index):
     timestamp = int(time.time())
     
     return {
-        "unsplash": f"https://loremflickr.com/1200/630/{clean_keyword}?lock={seed}&t={timestamp}",
+        "unsplash": f"https://picsum.photos/seed/{seed}/1200/630",
         "pollinations": f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=600&nologo=true&seed={seed}&model=turbo"
     }
 

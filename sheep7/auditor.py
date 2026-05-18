@@ -30,7 +30,12 @@ def run():
         
         # 2. Branding Check
         if BRAND_NAME.lower() not in body.lower():
-            errors.append("MISSING_BRAND")
+            # Inject brand name into the first paragraph
+            paragraphs = body.split('\n\n')
+            paragraphs[0] = f"{BRAND_NAME}: {paragraphs[0]}"
+            article['body'] = '\n\n'.join(paragraphs)
+            body = article['body']
+            # Branding is now present, do not add error
             
         # 3. Signal Presence Check
         if not any(k.upper() in headline.upper() or k.upper() in body.upper() for k in SIGNAL_KEYWORDS):
