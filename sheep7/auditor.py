@@ -33,7 +33,7 @@ def run():
             errors.append("MISSING_BRAND")
             
         # 3. Signal Presence Check
-        if not any(k.upper() in headline.upper() for k in SIGNAL_KEYWORDS):
+        if not any(k.upper() in headline.upper() or k.upper() in body.upper() for k in SIGNAL_KEYWORDS):
             errors.append("MISSING_SIGNAL")
 
         # Placeholder Check
