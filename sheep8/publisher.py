@@ -152,9 +152,34 @@ def _build_index(latest):
 </body>
 </html>"""
 
+def _get_affiliate_block(category):
+    c = category.lower()
+    if 'tech' in c or 'ai' in c:
+        branding = "AI Infrastructure: Institutional-Grade Compute & Deployments"
+        links = [
+            ("RunPod", "https://www.runpod.io/?ref=autoflock"),
+            ("Vast.ai", "https://vast.ai/?ref=autoflock"),
+            ("Railway", "https://railway.app?referralCode=autoflock"),
+            ("DigitalOcean", "https://m.do.co/c/autoflock"),
+            ("Hostinger", "https://www.hostinger.com/autoflock")
+        ]
+    else:
+        branding = "Autonomous Infrastructure: Optimize Your Stack"
+        links = [("Auto Infrastructure", "#")]
+    
+    links_html = "".join([f'<a href="{url}" style="color:var(--accent-blue); margin: 0 10px; text-decoration:none;">{name}</a>' for name, url in links])
+    
+    return f'''
+    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; margin: 3rem 0; text-align: center; backdrop-filter: blur(10px);">
+        <h4 style="color: #fff; margin-bottom: 1rem; font-size: 1.25rem;">{branding}</h4>
+        <div>{links_html}</div>
+    </div>
+    '''
+
 def _build_article_page(a):
     import markdown
     body_html = markdown.markdown(a['body'])
+    affiliate_block = _get_affiliate_block(a.get('category', 'Default'))
     
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -164,8 +189,8 @@ def _build_article_page(a):
     {a.get('meta', '')}
     <link rel="stylesheet" href="style.css">
     <style>
-        .article-body { font-size: 1.35rem; line-height: 1.9; color: rgba(255, 255, 255, 0.8); }
-        .article-body h1, .article-body h2, .article-body h3 { font-family: 'Space Grotesk', sans-serif; color: #fff; margin-top: 2.5rem; }
+        .article-body {{ font-size: 1.35rem; line-height: 1.9; color: rgba(255, 255, 255, 0.8); }}
+        .article-body h1, .article-body h2, .article-body h3 {{ font-family: 'Space Grotesk', sans-serif; color: #fff; margin-top: 2.5rem; }}
     </style>
 </head>
 <body class="article-page dark-theme">
@@ -175,6 +200,7 @@ def _build_article_page(a):
             <img src="{a['image_url']}" class="hero-img">
             <div class="article-body">
                 {body_html}
+                {affiliate_block}
             </div>
             <div class="source-link">
                 Source: <a href="{a['source_url']}" target="_blank">{a['source']}</a>
