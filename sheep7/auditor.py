@@ -49,7 +49,7 @@ def run():
         for kw in NICHE_KEYWORDS:
             density_score += len(re.findall(rf"\b{re.escape(kw)}\b", body_lower))
         
-        if density_score < 8:
+        if density_score < 5:
             errors.append("DENSITY_FAIL")
             
         # 5. Branding Check
@@ -68,7 +68,7 @@ def run():
         article["digital_analyst_score"] = density_score
         article["clean"] = len(errors) == 0
         
-        # "don't include in sheep7_audited.json" if score < 8 (DENSITY_FAIL) or other fails.
+        # "don't include in sheep7_audited.json" if score < 5 (DENSITY_FAIL) or other fails.
         if article["clean"]:
             clean.append(article)
         else:

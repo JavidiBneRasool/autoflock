@@ -1,6 +1,61 @@
 import json, os, hashlib, requests, zipfile, time, subprocess, shutil, urllib.parse, random
 from datetime import datetime
 
+HEADER_HTML = """
+    <header class="ai-header">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+            .ai-header {
+                position: sticky; top: 0; z-index: 9999; width: 100%;
+                background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+                font-family: 'Space Grotesk', sans-serif;
+            }
+            .ai-header-content {
+                max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem;
+                display: flex; justify-content: space-between; align-items: center;
+            }
+            .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
+            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+            .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
+            .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+            .ai-status-pill {
+                padding: 0.35rem 0.75rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.1);
+                border-radius: 100px; font-size: 0.7rem; color: #fff; font-weight: 500;
+                display: flex; align-items: center; gap: 0.5rem;
+            }
+            @media (max-width: 640px) { .ai-tagline { display: none; } }
+        </style>
+        <div class="ai-header-content">
+            <a href="/" class="ai-logo">
+                <div class="ai-logo-text">Auto <span>Flock</span></div>
+                <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
+            </a>
+            <div class="ai-status-pill">
+                <span style="color: #0ff;">🟢</span> Engine: Auto Flock Agent
+            </div>
+        </div>
+    </header>
+"""
+
+FOOTER_HTML = """
+    <footer class="ai-footer">
+        <style>
+            .ai-footer {
+                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
+                font-family: 'Space Grotesk', sans-serif; text-align: center;
+            }
+            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
+            .ai-footer-logo span { color: #0ff; }
+            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
+            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
+        </style>
+        <div class="ai-footer-logo">Auto <span>Flock</span></div>
+        <p class="ai-footer-text">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
+        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
+    </footer>
+"""
+
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = f"{PROJECT}/output"
 SITE_DIR = os.path.join(PROJECT, "publish")
@@ -62,61 +117,6 @@ def run():
 
     print(f"🐑 SHEEP 8: {len(current_articles)} SEO-optimized articles published ✓")
     return {"published": True}
-
-HEADER_HTML = """
-    <header class="ai-header">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
-            .ai-header {
-                position: sticky; top: 0; z-index: 9999; width: 100%;
-                background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-                border-bottom: 1px solid rgba(0, 255, 255, 0.15);
-                font-family: 'Space Grotesk', sans-serif;
-            }
-            .ai-header-content {
-                max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem;
-                display: flex; justify-content: space-between; align-items: center;
-            }
-            .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
-            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
-            .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
-            .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
-            .ai-status-pill {
-                padding: 0.35rem 0.75rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.1);
-                border-radius: 100px; font-size: 0.7rem; color: #fff; font-weight: 500;
-                display: flex; align-items: center; gap: 0.5rem;
-            }
-            @media (max-width: 640px) { .ai-tagline { display: none; } }
-        </style>
-        <div class="ai-header-content">
-            <a href="/" class="ai-logo">
-                <div class="ai-logo-text">Auto <span>Flock</span></div>
-                <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
-            </a>
-            <div class="ai-status-pill">
-                <span style="color: #0ff;">🟢</span> Engine: Auto Flock Agent
-            </div>
-        </div>
-    </header>
-"""
-
-FOOTER_HTML = """
-    <footer class="ai-footer">
-        <style>
-            .ai-footer {
-                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
-                font-family: 'Space Grotesk', sans-serif; text-align: center;
-            }
-            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
-            .ai-footer-logo span { color: #0ff; }
-            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
-            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
-        </style>
-        <div class="ai-footer-logo">Auto <span>Flock</span></div>
-        <p class="ai-footer-text">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
-        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
-    </footer>
-"""
 
 def _build_index(latest):
     articles_html = ""
