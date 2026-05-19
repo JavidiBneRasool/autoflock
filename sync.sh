@@ -32,7 +32,7 @@ if ! git diff --cached --quiet; then
 fi
 
 echo "📥 Pulling latest changes..."
-git pull --rebase origin main || {
+git pull --rebase -X theirs origin main || {
   echo "Rebase failed. Trying to abort and force sync..."
   git rebase --abort || true
   git fetch origin main
@@ -56,7 +56,11 @@ fi
 echo "📤 Pushing to GitHub..."
 if ! git push origin main; then
   echo "Push failed. Attempting one last rebase and push..."
-  git pull --rebase origin main
+  git pull --rebase -X theirs origin main || {
+    echo "Rebase still failed. Aborting rebase before exit."
+    git rebase --abort || true
+    fail "Final rebase failed"
+  }
   git push origin main || fail "Final push failed"
 fi
 

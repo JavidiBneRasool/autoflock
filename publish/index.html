@@ -1,189 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Flock | AI Intelligence Hub</title>
+    <title>AUTO FLOCK | AI Intelligence Network</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
-    
-    <header class="ai-header">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
-            .ai-header {
-                position: sticky; top: 0; z-index: 9999; width: 100%;
-                background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-                border-bottom: 1px solid rgba(0, 255, 255, 0.15);
-                font-family: 'Space Grotesk', sans-serif;
-            }
-            .ai-header-content {
-                max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem;
-                display: flex; justify-content: space-between; align-items: center;
-            }
-            .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
-            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
-            .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
-            .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
-            .ai-status-pill {
-                padding: 0.35rem 0.75rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.1);
-                border-radius: 100px; font-size: 0.7rem; color: #fff; font-weight: 500;
-                display: flex; align-items: center; gap: 0.5rem;
-            }
-            @media (max-width: 640px) { .ai-tagline { display: none; } }
-        </style>
-        <div class="ai-header-content">
-            <a href="/" class="ai-logo">
-                <div class="ai-logo-text">Auto <span>Flock</span></div>
-                <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
+<body>
+    <nav class="topbar">
+        <div class="nav-inner">
+            <a class="brand" href="/">
+                <span class="bolt">⚡</span>
+                <span class="brand-word mono">AUTO<span>FLOCK</span></span>
+                <span class="live-pill mono">v2.1 LIVE</span>
             </a>
-            <div class="ai-status-pill">
-                <span style="color: #0ff;">🟢</span> Engine: Auto Flock Agent
+            <div class="nav-links mono">
+                <a class="active" href="/">Dashboard</a>
+                <a href="#signals">Signals</a>
+                <a href="#research">Research</a>
+                <a href="#terminal">Terminal</a>
             </div>
+            <div class="search-row">
+                <input class="search-box" type="search" placeholder="Search intelligence..." oninput="filterCards(this.value)">
+                <button class="connect-btn">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="wrap hero">
+        <div class="hero-grid">
+            <article class="glass-card featured" onclick="window.location.href='conditioning-lstm-decoder-and-bi-directional-attention-based-question.html'">
+                <div class="feature-mark">◆</div>
+                <div class="badge-row">
+                    <span class="badge opportunity">OPPORTUNITY</span>
+                    <span class="meta mono">AI RESEARCH • LIVE</span>
+                </div>
+                <h1>📈 OPPORTUNITY: Conditioning LSTM Decoder and Bi-directional Attention Based Question  — Strategy</h1>
+                <p class="summary">Auto Flock Intelligence: 📈 OPPORTUNITY: Conditioning LSTM Decoder and Bi-directional Attention Based Question — Strategy Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal Applying neural-networks on Question Answering has gained...</p>
+                <div class="feature-foot">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <span class="source-dot"></span>
+                        <span class="mono">ArXiv AI</span>
+                    </div>
+                    <span class="read-link mono">Read Analysis →</span>
+                </div>
+            </article>
+
+            <aside class="side-stack">
+                <section class="glass-card status-card">
+                    <p class="kicker mono">System Status</p>
+                    <div class="stat-row"><span>Neural Net Load</span><strong class="mono" style="color:var(--brand-green)">98%</strong></div>
+                    <div class="bar"><span style="width:98%;background:var(--brand-green)"></span></div>
+                    <div class="stat-row"><span>Threat Level</span><strong class="mono" style="color:var(--brand-red)">HIGH</strong></div>
+                    <div class="bar"><span style="width:75%;background:var(--brand-red)"></span></div>
+                </section>
+                <section class="glass-card mini-signal">
+                    <span class="badge warning">WARNING</span>
+                    <h3>🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report</h3>
+                    <p class="summary" style="font-size:.9rem">Auto Flock Intelligence: 🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report Auto Flock Sen...</p>
+                    <span class="meta mono">ArXiv AI</span>
+                </section>
+            </aside>
         </div>
     </header>
 
-    <div class="container">
-        <div class="pro-grid">
+    <section class="wrap tabs mono">
+        <button class="tab active" onclick="filterCards('')">All Feeds</button>
+        <button class="tab" onclick="filterCards('warning')">Warnings</button>
+        <button class="tab" onclick="filterCards('opportunity')">Opportunities</button>
+        <button class="tab" onclick="filterCards('terminal')">Terminal/Dev</button>
+        <button class="tab" onclick="filterCards('security')">Automation/Sec</button>
+    </section>
+
+    <main class="wrap" id="signals">
+        <div class="feed-grid" id="feedGrid">
             
-            <div class="pro-card" onclick="window.location.href='conditioning-lstm-decoder-and-bi-directional-attention-based-question.html'">
-                <div class="tag">AI Research</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Conditioning LSTM Decoder and Bi-directional Attention Based Question  — Strategy</h3>
-                <p>Auto Flock Intelligence:  📈 OPPORTUNITY: Conditioning LSTM Decoder and Bi-directional Attention Based Question  — Strategy
-
-Auto Flock Senio...</p>
-                <div class="card-foot">
-                    <span>ArXiv AI</span>
+            <article class="glass-card feed-card" style="--accent:var(--brand-red)" onclick="window.location.href='unsupervised-data-augmentation-for-consistency-training.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge warning">WARNING</span>
+                        <span class="meta mono">RISK REPORT</span>
+                    </div>
+                    <h2>🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report</h2>
+                    <p>Auto Flock Intelligence: 🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intellig...</p>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='unsupervised-data-augmentation-for-consistency-training.html'">
-                <div class="tag">AI Research</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report</h3>
-                <p>Auto Flock Intelligence:  🚨 WARNING: Unsupervised Data Augmentation for Consistency Training — Risk Report
-
-Auto Flock Senior Analyst | May ...</p>
-                <div class="card-foot">
+                <div class="card-foot mono">
                     <span>ArXiv AI</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='it-s-all-in-the-name.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: It’s all in the name — Analysis</h3>
-                <p>Auto Flock Intelligence:  🔮 SIGNAL: It’s all in the name — Analysis
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-purple)" onclick="window.location.href='it-s-all-in-the-name.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge signal">SIGNAL</span>
+                        <span class="meta mono">ANALYSIS</span>
+                    </div>
+                    <h2>🔮 SIGNAL: It’s all in the name — Analysis</h2>
+                    <p>Auto Flock Intelligence: 🔮 SIGNAL: It’s all in the name — Analysis Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal &lt;p&gt;&lt;a href=&quot;https://lobste....</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Lobsters Security</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='show-hn-i-made-a-3d-pose-maker-for-artists.html'">
-                <div class="tag">Terminal/Dev</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Show HN: I made a 3D pose maker for artists — Strategy</h3>
-                <p>Auto Flock Intelligence:  📈 OPPORTUNITY: Show HN: I made a 3D pose maker for artists — Strategy
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-blue)" onclick="window.location.href='show-hn-i-made-a-3d-pose-maker-for-artists.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge terminal">TERMINAL</span>
+                        <span class="meta mono">DEV</span>
+                    </div>
+                    <h2>📈 OPPORTUNITY: Show HN: I made a 3D pose maker for artists — Strategy</h2>
+                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Show HN: I made a 3D pose maker for artists — Strategy Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Hacker News</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='the-super-tiny-compiler-but-in-ada.html'">
-                <div class="tag">Terminal/Dev</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: The Super Tiny Compiler, but in Ada — Risk Report</h3>
-                <p>Auto Flock Intelligence:  🚨 WARNING: The Super Tiny Compiler, but in Ada — Risk Report
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-red)" onclick="window.location.href='the-super-tiny-compiler-but-in-ada.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge warning">WARNING</span>
+                        <span class="meta mono">RISK REPORT</span>
+                    </div>
+                    <h2>🚨 WARNING: The Super Tiny Compiler, but in Ada — Risk Report</h2>
+                    <p>Auto Flock Intelligence: 🚨 WARNING: The Super Tiny Compiler, but in Ada — Risk Report Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal &lt;p&gt;&lt;a hr...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Lobsters Programming</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='hanoi-s-humble-beer-glass-and-the-memory-of-a-nation.html'">
-                <div class="tag">Terminal/Dev</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: Hanoi's humble beer glass and the memory of a nation — Analysis</h3>
-                <p>Auto Flock Intelligence:  🔮 SIGNAL: Hanoi's humble beer glass and the memory of a nation — Analysis
-
-Auto Flock Senior Analyst | May 19, 202...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-blue)" onclick="window.location.href='hanoi-s-humble-beer-glass-and-the-memory-of-a-nation.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge terminal">TERMINAL</span>
+                        <span class="meta mono">DEV</span>
+                    </div>
+                    <h2>🔮 SIGNAL: Hanoi&#x27;s humble beer glass and the memory of a nation — Analysis</h2>
+                    <p>Auto Flock Intelligence: 🔮 SIGNAL: Hanoi&#x27;s humble beer glass and the memory of a nation — Analysis Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Si...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Hacker News</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='cheap-smart-doorbell-allows-fleet-wide-account-takeover-and-call-hijac.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Cheap smart doorbell allows fleet-wide account takeover and call hijac — Strategy</h3>
-                <p>Auto Flock Intelligence:  📈 OPPORTUNITY: Cheap smart doorbell allows fleet-wide account takeover and call hijac — Strategy
-
-Auto Flock Senio...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-green)" onclick="window.location.href='cheap-smart-doorbell-allows-fleet-wide-account-takeover-and-call-hijac.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge opportunity">OPPORTUNITY</span>
+                        <span class="meta mono">STRATEGY</span>
+                    </div>
+                    <h2>📈 OPPORTUNITY: Cheap smart doorbell allows fleet-wide account takeover and call hijac — Strategy</h2>
+                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Cheap smart doorbell allows fleet-wide account takeover and call hijac — Strategy Auto Flock Senior Analyst | May 19, 2026 --...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Lobsters Security</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='announcing-claude-managed-agents-on-cloudflare.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Announcing Claude Managed Agents on Cloudflare — Strategy</h3>
-                <p>Auto Flock Intelligence:  📈 OPPORTUNITY: Announcing Claude Managed Agents on Cloudflare — Strategy
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-green)" onclick="window.location.href='announcing-claude-managed-agents-on-cloudflare.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge opportunity">OPPORTUNITY</span>
+                        <span class="meta mono">STRATEGY</span>
+                    </div>
+                    <h2>📈 OPPORTUNITY: Announcing Claude Managed Agents on Cloudflare — Strategy</h2>
+                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Announcing Claude Managed Agents on Cloudflare — Strategy Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Sig...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Cloudflare Blog AI</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='introducing-the-ettin-reranker-family.html'">
-                <div class="tag">AI Tools</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: Introducing the Ettin Reranker Family — Risk Report</h3>
-                <p>Auto Flock Intelligence:  🚨 WARNING: Introducing the Ettin Reranker Family — Risk Report
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-red)" onclick="window.location.href='introducing-the-ettin-reranker-family.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge warning">WARNING</span>
+                        <span class="meta mono">RISK REPORT</span>
+                    </div>
+                    <h2>🚨 WARNING: Introducing the Ettin Reranker Family — Risk Report</h2>
+                    <p>Auto Flock Intelligence: 🚨 WARNING: Introducing the Ettin Reranker Family — Risk Report Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal ⚡ Why...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Hugging Face Blog</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='the-new-phishing-click-how-oauth-consent-bypasses-mfa.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🔮 SIGNAL: The New Phishing Click: How OAuth Consent Bypasses MFA — Analysis</h3>
-                <p>Auto Flock Intelligence:  🔮 SIGNAL: The New Phishing Click: How OAuth Consent Bypasses MFA — Analysis
-
-Auto Flock Senior Analyst | May 19, 2...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-purple)" onclick="window.location.href='the-new-phishing-click-how-oauth-consent-bypasses-mfa.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge signal">SIGNAL</span>
+                        <span class="meta mono">ANALYSIS</span>
+                    </div>
+                    <h2>🔮 SIGNAL: The New Phishing Click: How OAuth Consent Bypasses MFA — Analysis</h2>
+                    <p>Auto Flock Intelligence: 🔮 SIGNAL: The New Phishing Click: How OAuth Consent Bypasses MFA — Analysis Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>The Hacker News AI</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='drupal-to-release-urgent-core-security-updates-on-may-20-sites-told-t.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">📈 OPPORTUNITY: Drupal to Release Urgent Core Security Updates on May 20, Sites Told t — Strategy</h3>
-                <p>Auto Flock Intelligence:  📈 OPPORTUNITY: Drupal to Release Urgent Core Security Updates on May 20, Sites Told t — Strategy
-
-Auto Flock Senio...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-red)" onclick="window.location.href='drupal-to-release-urgent-core-security-updates-on-may-20-sites-told-t.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge warning">WARNING</span>
+                        <span class="meta mono">RISK REPORT</span>
+                    </div>
+                    <h2>📈 OPPORTUNITY: Drupal to Release Urgent Core Security Updates on May 20, Sites Told t — Strategy</h2>
+                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Drupal to Release Urgent Core Security Updates on May 20, Sites Told t — Strategy Auto Flock Senior Analyst | May 19, 2026 --...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>The Hacker News AI</span>
+                    <span>2026-05-19</span>
                 </div>
-            </div>
-            <div class="pro-card" onclick="window.location.href='meet-rassvet-russia-s-answer-to-starlink.html'">
-                <div class="tag">Automation/Sec</div>
-                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem;">🚨 WARNING: Meet Rassvet, Russia’s Answer to Starlink — Risk Report</h3>
-                <p>Auto Flock Intelligence:  🚨 WARNING: Meet Rassvet, Russia’s Answer to Starlink — Risk Report
-
-Auto Flock Senior Analyst | May 19, 2026...</p>
-                <div class="card-foot">
+            </article>
+            <article class="glass-card feed-card" style="--accent:var(--brand-red)" onclick="window.location.href='meet-rassvet-russia-s-answer-to-starlink.html'">
+                <div>
+                    <div class="badge-row">
+                        <span class="badge warning">WARNING</span>
+                        <span class="meta mono">RISK REPORT</span>
+                    </div>
+                    <h2>🚨 WARNING: Meet Rassvet, Russia’s Answer to Starlink — Risk Report</h2>
+                    <p>Auto Flock Intelligence: 🚨 WARNING: Meet Rassvet, Russia’s Answer to Starlink — Risk Report Auto Flock Senior Analyst | May 19, 2026 --- 🎯 The Intelligence Signal Wi...</p>
+                </div>
+                <div class="card-foot mono">
                     <span>Wired Security</span>
+                    <span>2026-05-19</span>
                 </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <span class="brand-word mono">AUTO<span>FLOCK</span></span>
+                    <p>Autonomous Infrastructure for the AI Age. Real-time intelligence aggregation and risk analysis.</p>
+                </div>
+                <div><h4 class="mono">Platform</h4><ul><li>API Documentation</li><li>System Status</li><li>Pricing</li></ul></div>
+                <div><h4 class="mono">Intelligence</h4><ul><li>Threat Reports</li><li>Market Signals</li><li>Research Papers</li></ul></div>
+                <div><h4 class="mono">Newsletter</h4><div class="newsletter"><input type="email" placeholder="agent@auto.flock"><button>→</button></div></div>
+            </div>
+            <div class="footer-bottom mono">
+                <span>© 2026 AI Flock Empire — Auto Flock Network</span>
+                <span>SYSTEM STATUS: OPTIMAL • PROTOCOL: X-7 NEURAL</span>
             </div>
         </div>
-    </div>
-    
-    <footer class="ai-footer">
-        <style>
-            .ai-footer {
-                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
-                font-family: 'Space Grotesk', sans-serif; text-align: center;
-            }
-            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
-            .ai-footer-logo span { color: #0ff; }
-            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
-            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
-        </style>
-        <div class="ai-footer-logo">Auto <span>Flock</span></div>
-        <p class="ai-footer-text">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
-        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
     </footer>
-
+    <script>
+      function filterCards(query) {
+        const q = String(query || '').toLowerCase();
+        document.querySelectorAll('.feed-card').forEach(card => {
+          card.style.display = card.innerText.toLowerCase().includes(q) ? '' : 'none';
+        });
+      }
+    </script>
 </body>
 </html>
