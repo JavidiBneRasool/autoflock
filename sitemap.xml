@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://autoflock.cutbar.in/</loc><changefreq>hourly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://autoflock.cutbar.in/the-ctf-scene-is-dead.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/i-ve-joined-anthropic.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/dirtydecrypt-poc-released-for-linux-kernel-cve-2026-31635-lpe-vulnerab.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/trapdoor-android-ad-fraud-scheme-hit-659-million-daily-bid-requests-us.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/openai-co-founder-andrej-karpathy-joins-anthropic-s-pre-training-team.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/i-ve-built-a-virtual-museum-with-nearly-every-operating-system-you-can.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/extending-conversational-memory-in-kiro-cli-using-amazon-bedrock-agent.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/scalable-voice-agent-design-with-amazon-nova-sonic-multi-agent-tools.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/hanoi-s-humble-beer-glass-and-the-memory-of-a-nation.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/cheap-smart-doorbell-allows-fleet-wide-account-takeover-and-call-hijac.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/the-super-tiny-compiler-but-in-ada.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -150,11 +158,5 @@
   <url><loc>https://autoflock.cutbar.in/20260517-145139-1.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/20260517-145139-5.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/20260517-145139-6.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-153239-1.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-153239-4.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-151131-2.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-151131-3.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-153239-3.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/20260517-151131-1.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/20260517-153239-2.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
