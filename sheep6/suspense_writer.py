@@ -1,9 +1,11 @@
 import json, os, random, re
 from datetime import datetime
-from slugify import slugify
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = f"{PROJECT}/output"
+
+def slugify(value):
+    return re.sub(r"[^a-z0-9]+", "-", str(value).lower()).strip("-")[:100] or "article"
 
 def generate_seo_meta(headline, summary, image_url):
     return f"""

@@ -1,4 +1,4 @@
-import json, os, hashlib, requests, zipfile, time, subprocess, shutil, urllib.parse, random
+import json, os, hashlib, zipfile, time, subprocess, shutil, urllib.parse, random, html
 from datetime import datetime
 
 HEADER_HTML = """
@@ -176,9 +176,16 @@ def _get_affiliate_block(category):
     </div>
     '''
 
+def _markdown_to_html(value):
+    try:
+        import markdown
+        return markdown.markdown(value)
+    except Exception:
+        paragraphs = [p.strip() for p in str(value).split("\n\n") if p.strip()]
+        return "\n".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
+
 def _build_article_page(a):
-    import markdown
-    body_html = markdown.markdown(a['body'])
+    body_html = _markdown_to_html(a.get('body', ''))
     affiliate_block = _get_affiliate_block(a.get('category', 'Default'))
     
     return f"""<!DOCTYPE html>

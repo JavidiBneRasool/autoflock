@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://autoflock.cutbar.in/sitemap.xml
+Sitemap: https://autoflock.cutbar.in/news-sitemap.xml
