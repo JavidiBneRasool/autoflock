@@ -2,7 +2,7 @@ import json, os
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
-PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT = os.path.dirname(os.path.abspath(__file__))
 OUTPUT = f"{PROJECT}/output"
 KEY_FILE = f"{PROJECT}/config/google_indexing_key.json"
 BASE_URL = "https://autoflock.cutbar.in"

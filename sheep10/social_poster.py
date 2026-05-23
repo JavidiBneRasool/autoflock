@@ -61,7 +61,11 @@ def post_to_telegram(bot_token, channel_id, headline, article_url, category, sou
     api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     payload = {"chat_id": channel_id, "text": post_text, "parse_mode": "HTML"}
     try:
-        r = requests.post(api_url, json=payload); return r.json().get("ok"), "ok"
+        r = requests.post(api_url, json=payload)
+        data = r.json()
+        if data.get("ok"):
+            return True, "ok"
+        return False, data.get("description", "Unknown error")
     except Exception as e: return False, str(e)
 
 def post_to_facebook(page_id, access_token, headline, article_url, category, source):
@@ -70,11 +74,27 @@ def post_to_facebook(page_id, access_token, headline, article_url, category, sou
     api_url = f"https://graph.facebook.com/{page_id}/feed"
     payload = {"message": message, "link": article_url, "access_token": access_token}
     try:
-        r = requests.post(api_url, data=payload); return r.status_code == 200, "ok"
+        r = requests.post(api_url, data=payload)
+        if r.status_code == 200:
+            return True, "ok"
+        data = r.json()
+        return False, data.get("error", {}).get("message", f"HTTP {r.status_code}")
+    except Exception as e: return False, str(e)
+
+def post_to_whatsapp(instance, token, number, headline, article_url, category, source):
+    hook = generate_curiosity_hook(headline, category, source)
+    message = f"*{hook}*\nRead more: {article_url}\n\n#Autoflock #AI #Automation"
+    api_url = f"https://api.ultramsg.com/{instance}/messages/chat"
+    payload = {"token": token, "to": number, "body": message}
+    try:
+        r = requests.post(api_url, data=payload)
+        if r.status_code == 200:
+            return True, "ok"
+        return False, f"HTTP {r.status_code}: {r.text[:100]}"
     except Exception as e: return False, str(e)
 
 def run():
-    print("🐑 SHEEP 10: Posting Analyst Hooks to Social Hub...")
+    print("\n🐑 SHEEP 10: Posting Analyst Hooks to Social Hub...")
     config = load_config()
     bot_token = config.get("telegram_bot_token")
     channel_id = config.get("telegram_channel_id")
@@ -86,7 +106,7 @@ def run():
 
     articles = _load_published_articles()
     if not articles:
-        print("🐑 SHEEP 10: No articles!"); return None
+        print("   ❌ No articles found in history!"); return None
 
     posted = _load_posted()
     posted_urls = {_canonical_url(item.get("source_url", "")) for item in posted}
@@ -103,7 +123,7 @@ def run():
         if len(selected) == 2: break
 
     if not selected:
-        print("🐑 SHEEP 10: No new social signals to send ✓"); return []
+        print("   ✅ No new social signals to send."); return []
 
     results = []
     for a in selected:
@@ -111,22 +131,41 @@ def run():
         au = _article_url(a)
         cat = a.get("category", "Tech")
         src = a.get("source", "Autoflock")
-        print(f"   Posting Hook: {h[:50]}...")
+        print(f"\n📢 Posting: {h[:60]}...")
 
-        sent = False
-        if bot_token and channel_id:
-            ok, _ = post_to_telegram(bot_token, channel_id, h, au, cat, src)
-            sent = sent or ok
-        if fb_page_id and fb_access_token:
-            ok, _ = post_to_facebook(fb_page_id, fb_access_token, h, au, cat, src)
-            sent = sent or ok
+        platforms = {}
         
-        res = {"headline": h, "url": au, "success": sent}
+        # 1. Telegram
+        if bot_token and channel_id:
+            ok, err = post_to_telegram(bot_token, channel_id, h, au, cat, src)
+            platforms["telegram"] = "✅" if ok else f"❌ ({err})"
+            print(f"   - Telegram: {platforms['telegram']}")
+        else:
+            platforms["telegram"] = "⏩ (Skipped)"
+
+        # 2. Facebook
+        if fb_page_id and fb_access_token:
+            ok, err = post_to_facebook(fb_page_id, fb_access_token, h, au, cat, src)
+            platforms["facebook"] = "✅" if ok else f"❌ ({err})"
+            print(f"   - Facebook: {platforms['facebook']}")
+        else:
+            platforms["facebook"] = "⏩ (Skipped)"
+
+        # 3. WhatsApp
+        if wa_instance and wa_token and wa_number:
+            ok, err = post_to_whatsapp(wa_instance, wa_token, wa_number, h, au, cat, src)
+            platforms["whatsapp"] = "✅" if ok else f"❌ ({err})"
+            print(f"   - WhatsApp: {platforms['whatsapp']}")
+        else:
+            platforms["whatsapp"] = "⏩ (Skipped)"
+        
+        sent = "✅" in platforms.values()
+        res = {"headline": h, "url": au, "success": sent, "platforms": platforms, "timestamp": time.time()}
         results.append(res); posted.insert(0, res)
-        time.sleep(5)
+        time.sleep(3)
 
     with open(POSTED_FILE, "w") as f: json.dump(posted[:300], f, indent=2)
-    print("🐑 SHEEP 10: Digital Analyst Social Feed updated ✓")
+    print("\n🐑 SHEEP 10: Digital Analyst Social Feed updated ✓")
     return results
 
 if __name__ == "__main__":

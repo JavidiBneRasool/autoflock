@@ -333,6 +333,7 @@ def _build_index(latest):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTO FLOCK | AI Intelligence Network</title>
+    <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -438,27 +439,111 @@ def _build_index(latest):
 
 def _get_affiliate_block(category):
     c = category.lower()
-    if 'tech' in c or 'ai' in c:
-        branding = "AI Infrastructure: Institutional-Grade Compute & Deployments"
-        links = [
-            ("RunPod", "https://www.runpod.io/?ref=autoflock"),
-            ("Vast.ai", "https://vast.ai/?ref=autoflock"),
-            ("Railway", "https://railway.app?referralCode=autoflock"),
-            ("DigitalOcean", "https://m.do.co/c/autoflock"),
-            ("Hostinger", "https://www.hostinger.com/autoflock")
-        ]
-    else:
-        branding = "Autonomous Infrastructure: Optimize Your Stack"
-        links = [("Auto Infrastructure", "#")]
+    branding = "AI Infrastructure: Institutional-Grade Compute & Deployments"
     
-    links_html = "".join([f'<a href="{url}" style="color:var(--accent-blue); margin: 0 10px; text-decoration:none;">{name}</a>' for name, url in links])
+    # SVG Icons for brands
+    icons = {
+        "RunPod": "https://www.runpod.io/assets/images/logo.svg", # Placeholder or stylized
+        "Vast.ai": "https://vast.ai/static/media/logo.8d2f5a6a.svg",
+        "Railway": "https://railway.app/brand/logotype-dark.svg",
+        "DigitalOcean": "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg",
+        "Hostinger": "https://www.vectorlogo.zone/logos/hostinger/hostinger-icon.svg"
+    }
+    
+    affiliates = [
+        ("RunPod", "https://www.runpod.io/?ref=autoflock", "https://cryptologos.cc/logos/render-rndr-logo.svg?v=024"), # Using stylized compute icons
+        ("Vast.ai", "https://vast.ai/?ref=autoflock", "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg"),
+        ("Railway", "https://railway.app?referralCode=autoflock", "https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg"),
+        ("DigitalOcean", "https://m.do.co/c/autoflock", "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg"),
+        ("Hostinger", "https://www.hostinger.com/autoflock", "https://www.vectorlogo.zone/logos/hostinger/hostinger-icon.svg")
+    ]
+    
+    links_html = "".join([f'''
+        <a href="{url}" target="_blank" class="affiliate-item">
+            <img src="{img}" alt="{name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png'">
+            <span>{name}</span>
+        </a>''' for name, url, img in affiliates])
     
     return f'''
-    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; margin: 3rem 0; text-align: center; backdrop-filter: blur(10px);">
-        <h4 style="color: #fff; margin-bottom: 1rem; font-size: 1.25rem;">{branding}</h4>
-        <div>{links_html}</div>
+    <div class="affiliate-container">
+        <h4>{branding}</h4>
+        <div class="affiliate-grid">
+            {links_html}
+        </div>
     </div>
+    <style>
+        .affiliate-container {{
+            margin: 4rem 0;
+            padding: 2.5rem;
+            background: rgba(15, 15, 17, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }}
+        .affiliate-container h4 {{
+            color: #fff;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }}
+        .affiliate-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            align-items: center;
+        }}
+        .affiliate-item {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }}
+        .affiliate-item:hover {{
+            background: rgba(0, 255, 255, 0.05);
+            border-color: rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }}
+        .affiliate-item img {{
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            filter: grayscale(1) brightness(1.5);
+            transition: filter 0.3s ease;
+        }}
+        .affiliate-item:hover img {{
+            filter: grayscale(0) brightness(1);
+        }}
+        .affiliate-item span {{
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }}
+        .affiliate-item:hover span {{
+            color: #fff;
+        }}
+    </style>
     '''
+
+def _get_adsense_tag():
+    try:
+        with open(f"{PROJECT}/config/adsense.json", "r") as f:
+            config = json.load(f)
+            return config.get("script_tag", "")
+    except:
+        return ""
+
 
 def _markdown_to_html(value):
     try:
@@ -471,13 +556,16 @@ def _markdown_to_html(value):
 def _build_article_page(a):
     body_html = _markdown_to_html(a.get('body', ''))
     affiliate_block = _get_affiliate_block(a.get('category', 'Default'))
+    adsense = _get_adsense_tag()
     
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     {a.get('meta', '')}
+    {adsense}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
