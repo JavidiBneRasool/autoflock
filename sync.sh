@@ -6,6 +6,11 @@
 set -euo pipefail
 
 PROJECT_DIR="$(pwd)"
+# Set Git Identity if not configured (crucial for GitHub Actions)
+if [ -z "$(git config user.name || true)" ]; then
+  git config --global user.name "Flock Agent"
+  git config --global user.email "agent@cutbar.in"
+fi
 cd "$PROJECT_DIR"
 
 fail() {

@@ -38,7 +38,7 @@ def generate_sitemap():
 
     news_xml = ['<?xml version="1.0" encoding="UTF-8"?>']
     news_xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">')
-    today = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d")
+    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     for art in articles[:1000]:
         title = art.replace(".html", "").replace("-", " ").title()
         news_xml.append(f'  <url><loc>{BASE_URL}/{art}</loc><news:news><news:publication><news:name>AutoFlock</news:name><news:language>en</news:language></news:publication><news:publication_date>{today}</news:publication_date><news:title>{title}</news:title></news:news></url>')
