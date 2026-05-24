@@ -185,7 +185,7 @@ HEADER_HTML = """
 COMMON_JS = """
     <script>
         let TRANSLATIONS = {};
-        fetch('/translations.json').then(r => r.json()).catch(()=>{}).then(data => { if(data) TRANSLATIONS = data; applyLang(); });
+        fetch('/translations.json').then(r => r.json()).catch(()=>{ }).then(data => { if(data) TRANSLATIONS = data; applyLang(); });
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
@@ -196,6 +196,7 @@ COMMON_JS = """
 
         async function applyLang() {
             const lang = localStorage.getItem('lang') || 'en';
+            document.documentElement.lang = lang;
             document.body.classList.toggle('ur', lang === 'ur');
             const btnEn = document.getElementById('btn-en');
             const btnUr = document.getElementById('btn-ur');
@@ -221,13 +222,18 @@ COMMON_JS = """
             for(let el of nodes) {
                 const key = el.getAttribute('data-trans');
                 const originalText = el.getAttribute('data-original') || el.innerText;
+                if (!originalText || originalText.length < 2) continue;
                 
                 if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
                     el.innerHTML = TRANSLATIONS[lang][key];
-                } else if (originalText && originalText.length > 1) {
+                } else {
                     try {
-                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t&q=${encodeURIComponent(originalText)}`;
-                        const res = await fetch(url);
+                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t`;
+                        const res = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: `q=${encodeURIComponent(originalText)}`
+                        });
                         const data = await res.json();
                         let translated = '';
                         if(data && data[0]) {
@@ -239,6 +245,7 @@ COMMON_JS = """
                             el.innerHTML = translated;
                         }
                     } catch(e) {
+                        console.error('Translation failed:', e);
                         el.innerHTML = originalText;
                     }
                 }
@@ -349,8 +356,7 @@ def run():
     with open(HISTORY_FILE, "w") as f:
         json.dump(history, f, indent=2)
 
-    with open(f"{SITE_DIR}/style.css", "w", encoding="utf-8") as f:
-        f.write(AUTOFLOCK_STYLE.strip() + "\n")
+    shutil.copy("/data/data/com.termux/files/home/projects/media/shared/styles/global.css", f"{SITE_DIR}/style.css")
 
     # Generate Index Page
     index_html = _build_index(history[:12])
@@ -513,15 +519,13 @@ def _build_article_page(a):
     affiliate_block = _get_affiliate_block(a.get('category', 'Default'))
     
     # Process body_html to wrap segments in translation tags
-    translated_body = ""
-    for segment in body_html.split('</p>'):
-        if segment.strip():
-            clean_segment = segment.replace('<p>', '').strip()
-            attr_seg = html.escape(clean_segment.replace('"', '&quot;'))
-            translated_body += f'<p data-trans="{attr_seg}" data-original="{attr_seg}">{clean_segment}</p>'
+    def wrap_trans(m):
+        tag, inner = m.group(1), m.group(2)
+        if not inner.strip() or len(inner) < 2: return m.group(0)
+        attr = inner.replace('"', '&quot;')
+        return f'<{tag} data-trans="{attr}" data-original="{attr}">{inner}</{tag}>'
     
-    if not translated_body:
-        translated_body = body_html
+    translated_body = re.sub(r'<(p|h[1-6]|li|th|td|figcaption)\b[^>]*>(.*?)</\1>', wrap_trans, body_html, flags=re.DOTALL|re.IGNORECASE)
 
     return f"""<!DOCTYPE html>
 <html lang="en">

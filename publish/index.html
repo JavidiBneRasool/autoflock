@@ -269,7 +269,7 @@
     
     <script>
         let TRANSLATIONS = {};
-        fetch('/translations.json').then(r => r.json()).catch(()=>{}).then(data => { if(data) TRANSLATIONS = data; applyLang(); });
+        fetch('/translations.json').then(r => r.json()).catch(()=>{ }).then(data => { if(data) TRANSLATIONS = data; applyLang(); });
 
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
@@ -280,6 +280,7 @@
 
         async function applyLang() {
             const lang = localStorage.getItem('lang') || 'en';
+            document.documentElement.lang = lang;
             document.body.classList.toggle('ur', lang === 'ur');
             const btnEn = document.getElementById('btn-en');
             const btnUr = document.getElementById('btn-ur');
@@ -305,13 +306,18 @@
             for(let el of nodes) {
                 const key = el.getAttribute('data-trans');
                 const originalText = el.getAttribute('data-original') || el.innerText;
+                if (!originalText || originalText.length < 2) continue;
                 
                 if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
                     el.innerHTML = TRANSLATIONS[lang][key];
-                } else if (originalText && originalText.length > 1) {
+                } else {
                     try {
-                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t&q=${encodeURIComponent(originalText)}`;
-                        const res = await fetch(url);
+                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t`;
+                        const res = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: `q=${encodeURIComponent(originalText)}`
+                        });
                         const data = await res.json();
                         let translated = '';
                         if(data && data[0]) {
@@ -323,6 +329,7 @@
                             el.innerHTML = translated;
                         }
                     } catch(e) {
+                        console.error('Translation failed:', e);
                         el.innerHTML = originalText;
                     }
                 }
