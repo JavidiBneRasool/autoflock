@@ -460,6 +460,17 @@ def _build_article_page(a):
     body_html = _markdown_to_html(a.get('body', ''))
     affiliate_block = _get_affiliate_block(a.get('category', 'Default'))
     
+    # Process body_html to wrap segments in translation tags
+    translated_body = ""
+    for segment in body_html.split('</p>'):
+        if segment.strip():
+            clean_segment = segment.replace('<p>', '').strip()
+            attr_seg = html.escape(clean_segment.replace('"', '&quot;'))
+            translated_body += f'<p data-trans="{attr_seg}" data-original="{attr_seg}">{clean_segment}</p>'
+    
+    if not translated_body:
+        translated_body = body_html
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -505,9 +516,7 @@ def _build_article_page(a):
         <article>
             <img src="{a['image_url']}" class="hero-img" alt="{a['headline']}">
             <div class="article-body">
-                <div data-trans="{a['headline'].replace('"', '&quot;')}" data-original="{a['headline'].replace('"', '&quot;')}">
-                    {body_html}
-                </div>
+                {translated_body}
                 {affiliate_block}
             </div>
             <div class="source-link">
