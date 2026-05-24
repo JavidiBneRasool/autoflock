@@ -6,6 +6,138 @@ OUTPUT = f"{PROJECT}/output"
 SITE_DIR = os.path.join(PROJECT, "publish")
 HISTORY_FILE = f"{PROJECT}/history.json"
 
+AUTOFLOCK_STYLE = """
+:root {
+  --brand-black: #050505;
+  --brand-card: #0f0f11;
+  --brand-panel: rgba(15, 15, 17, 0.72);
+  --brand-border: #222225;
+  --brand-green: #00e599;
+  --brand-red: #ff4d4d;
+  --brand-purple: #a855f7;
+  --brand-blue: #3b82f6;
+  --text-main: #e7e9ee;
+  --text-muted: #9ca3af;
+}
+body.light-mode {
+  --brand-black: #ffffff;
+  --brand-card: #f9fafb;
+  --brand-panel: rgba(255, 255, 255, 0.9);
+  --brand-border: #e5e7eb;
+  --text-main: #111827;
+  --text-muted: #4b5563;
+}
+
+@font-face {
+  font-family: 'JameelNoori';
+  src: url('/fonts/JameelNooriNastaleeq.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--brand-black); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--brand-black);
+  color: var(--text-main);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+/* Force Nastaleeq for Urdu */
+[dir="rtl"], body.ur, body.ur * { 
+  font-family: 'JameelNoori', serif !important; 
+  line-height: 2 !important;
+  text-align: right !important;
+}
+
+a { color: inherit; text-decoration: none; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+.hero { padding: 48px 0 28px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0,2fr) minmax(280px,1fr); gap: 24px; }
+.glass-card {
+  background: var(--brand-panel);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--brand-border);
+  transition: all .25s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.featured { position: relative; overflow: hidden; border-radius: 18px; padding: clamp(24px, 4vw, 36px); min-height: 360px; cursor: pointer; }
+.feature-mark {
+  position: absolute; right: 28px; top: 28px; color: var(--brand-green);
+  font-size: 8rem; opacity: .12; line-height: 1;
+}
+.badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 18px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; padding: 5px 9px;
+  border: 1px solid currentColor; font-size: .72rem; font-weight: 800;
+}
+.badge.opportunity { color: var(--brand-green); background: rgba(0,229,153,.12); }
+.badge.warning { color: var(--brand-red); background: rgba(255,77,77,.12); }
+.badge.signal { color: var(--brand-purple); background: rgba(168,85,247,.12); }
+.badge.terminal { color: var(--brand-blue); background: rgba(59,130,246,.12); }
+.meta { color: var(--text-muted); font-size: .72rem; font-weight: 700; }
+.featured h1 {
+  max-width: 780px; margin: 0 0 18px; font-size: 2rem;
+  line-height: 1.1; letter-spacing: -.03em;
+}
+.featured:hover h1 { color: var(--brand-green); }
+.summary { max-width: 660px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+.feature-foot {
+  margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--brand-border);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.read-link { color: var(--brand-green); font-weight: 800; }
+.side-stack { display: flex; flex-direction: column; gap: 24px; }
+.status-card, .mini-signal { border-radius: 18px; padding: 24px; }
+.kicker { color: var(--text-muted); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 18px; }
+.stat-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: .9rem; }
+.bar { height: 6px; border-radius: 999px; background: rgba(0,0,0,0.2); overflow: hidden; margin-top: 10px; }
+.bar span { display: block; height: 100%; border-radius: 999px; }
+
+.feed-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; padding-bottom: 72px; }
+.feed-card { border-radius: 14px; padding: 24px; min-height: 255px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+.feed-card h2 { margin: 0 0 12px; font-size: 1.15rem; line-height: 1.35; color: var(--text-main); }
+.feed-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.58; margin: 0; }
+.card-foot { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--brand-border); display: flex; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: .75rem; }
+
+.article-content { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+.article-body { font-size: 1.1rem; line-height: 1.7; color: var(--text-main); }
+.article-body h1, .article-body h2, .article-body h3 { font-family: inherit; color: var(--text-main); margin-top: 2.5rem; margin-bottom: 1.2rem; font-weight: 700; }
+.article-body p { margin-bottom: 1.2rem; }
+
+.affiliate-container { background: var(--brand-panel); border: 1px solid var(--brand-border); border-radius: 16px; padding: 2rem; margin: 3.5rem 0; backdrop-filter: blur(10px); text-align: center; }
+.affiliate-title { color: var(--text-main); margin-bottom: 1.8rem; font-size: 1.2rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; opacity: 0.8; }
+.affiliate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.2rem; }
+.affiliate-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--brand-border); border-radius: 12px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s ease; }
+.affiliate-card:hover { background: rgba(0, 255, 255, 0.05); border-color: rgba(0, 255, 255, 0.2); transform: translateY(-3px); }
+.affiliate-card i { font-size: 1.8rem; color: #0ff; }
+.affiliate-card span { color: var(--text-main); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.hero-img { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid var(--brand-border); }
+.source-link { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--brand-border); font-size: 0.85rem; color: var(--text-muted); text-align: center; }
+.source-link a { color: var(--brand-green); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 920px) {
+  .hero-grid, .feed-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .hero-img { height: 220px; }
+    .affiliate-grid { grid-template-columns: repeat(2, 1fr); }
+    .article-body { font-size: 1.05rem; }
+}
+"""
+
 HEADER_HTML = """
     <header class="ai-header">
         <style>
@@ -146,98 +278,6 @@ FOOTER_HTML = """
     </footer>
 """
 
-AUTOFLOCK_STYLE = """
-:root {
-  --brand-black: #050505;
-  --brand-card: #0f0f11;
-  --brand-panel: rgba(15, 15, 17, 0.72);
-  --brand-border: #222225;
-  --brand-green: #00e599;
-  --brand-red: #ff4d4d;
-  --brand-purple: #a855f7;
-  --brand-blue: #3b82f6;
-  --text-main: #e7e9ee;
-  --text-muted: #9ca3af;
-}
-body.light-mode {
-  --brand-black: #ffffff;
-  --brand-card: #f9fafb;
-  --brand-panel: rgba(255, 255, 255, 0.9);
-  --brand-border: #e5e7eb;
-  --text-main: #111827;
-  --text-muted: #4b5563;
-}
-* { box-sizing: border-box; }
-html { background: var(--brand-black); }
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--brand-black);
-  color: var(--text-main);
-  font-family: Inter, system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  transition: all 0.3s ease;
-}
-a { color: inherit; text-decoration: none; }
-.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-.wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-
-.hero { padding: 48px 0 28px; }
-.hero-grid { display: grid; grid-template-columns: minmax(0,2fr) minmax(280px,1fr); gap: 24px; }
-.glass-card {
-  background: var(--brand-panel);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--brand-border);
-  transition: all .25s ease;
-}
-.glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-.featured { position: relative; overflow: hidden; border-radius: 18px; padding: clamp(24px, 4vw, 36px); min-height: 360px; cursor: pointer; }
-.feature-mark {
-  position: absolute; right: 28px; top: 28px; color: var(--brand-green);
-  font-size: 8rem; opacity: .12; line-height: 1;
-}
-.badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 18px; }
-.badge {
-  display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; padding: 5px 9px;
-  border: 1px solid currentColor; font-size: .72rem; font-weight: 800;
-}
-.badge.opportunity { color: var(--brand-green); background: rgba(0,229,153,.12); }
-.badge.warning { color: var(--brand-red); background: rgba(255,77,77,.12); }
-.badge.signal { color: var(--brand-purple); background: rgba(168,85,247,.12); }
-.badge.terminal { color: var(--brand-blue); background: rgba(59,130,246,.12); }
-.meta { color: var(--text-muted); font-size: .72rem; font-weight: 700; }
-.featured h1 {
-  max-width: 780px; margin: 0 0 18px; font-size: 2.2rem;
-  line-height: 1.1; letter-spacing: -.03em;
-}
-.featured:hover h1 { color: var(--brand-green); }
-.summary { max-width: 660px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-.feature-foot {
-  margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--brand-border);
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-}
-.read-link { color: var(--brand-green); font-weight: 800; }
-.side-stack { display: flex; flex-direction: column; gap: 24px; }
-.status-card, .mini-signal { border-radius: 18px; padding: 24px; }
-.kicker { color: var(--text-muted); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 18px; }
-.stat-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: .9rem; }
-.bar { height: 6px; border-radius: 999px; background: rgba(0,0,0,0.2); overflow: hidden; margin-top: 10px; }
-.bar span { display: block; height: 100%; border-radius: 999px; }
-
-.feed-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; padding-bottom: 72px; }
-.feed-card { border-radius: 14px; padding: 24px; min-height: 255px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
-.feed-card h2 { margin: 0 0 12px; font-size: 1.15rem; line-height: 1.35; color: var(--text-main); }
-.feed-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.58; margin: 0; }
-.card-foot { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--brand-border); display: flex; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: .75rem; }
-
-@media (max-width: 920px) {
-  .hero-grid, .feed-grid { grid-template-columns: 1fr; }
-}
-"""
-
 def _normalize_autoflock_article(article):
     replacements = {
         "NewsHour Intelligence": "Auto Flock Intelligence",
@@ -278,6 +318,18 @@ def _signal_type(article):
 def run():
     print("🐑 SHEEP 8: Publishing Expert Signals...")
     os.makedirs(SITE_DIR, exist_ok=True)
+    
+    # Ensure font exists
+    font_dir = f"{SITE_DIR}/fonts"
+    os.makedirs(font_dir, exist_ok=True)
+    font_src = os.path.expanduser("~/storage/downloads/Jameel Noori Nastaleeq Regular.ttf")
+    if os.path.exists(font_src):
+        shutil.copy(font_src, f"{font_dir}/JameelNooriNastaleeq.ttf")
+
+    # Sync translations
+    trans_src = f"{OUTPUT}/translations.json"
+    if os.path.exists(trans_src):
+        shutil.copy(trans_src, f"{SITE_DIR}/translations.json")
     
     try:
         with open(f"{OUTPUT}/sheep7_audited.json", "r") as f:
@@ -480,35 +532,6 @@ def _build_article_page(a):
     <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-@font-face{{font-family:'JameelNoori';src:url('/fonts/JameelNooriNastaleeq.ttf') format('truetype')}}
-        body.ur {{ font-family: 'JameelNoori', 'Inter', sans-serif; }}
-        .article-content {{ max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }}
-        .article-body {{ font-size: 1.1rem; line-height: 1.7; color: var(--text-main); }}
-        .article-body h1, .article-body h2, .article-body h3 {{ font-family: 'Space Grotesk', sans-serif; color: var(--text-main); margin-top: 2.5rem; margin-bottom: 1.2rem; text-align: left; font-weight: 700; }}
-        body.ur .article-body h1, body.ur .article-body h2, body.ur .article-body h3 {{ text-align: right; }}
-        .article-body p {{ margin-bottom: 1.2rem; text-align: left; }}
-        body.ur .article-body p {{ text-align: right; }}
-        .article-body ul, .article-body ol {{ margin-bottom: 1.2rem; padding-left: 1.5rem; text-align: left; }}
-        body.ur .article-body ul, body.ur .article-body ol {{ text-align: right; padding-right: 1.5rem; padding-left: 0; }}
-        
-        .affiliate-container {{ background: var(--brand-panel); border: 1px solid var(--brand-border); border-radius: 16px; padding: 2rem; margin: 3.5rem 0; backdrop-filter: blur(10px); text-align: center; }}
-        .affiliate-title {{ color: var(--text-main); margin-bottom: 1.8rem; font-size: 1.2rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; opacity: 0.8; }}
-        .affiliate-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1.2rem; }}
-        .affiliate-card {{ background: rgba(255, 255, 255, 0.03); border: 1px solid var(--brand-border); border-radius: 12px; padding: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; transition: all 0.3s ease; }}
-        .affiliate-card:hover {{ background: rgba(0, 255, 255, 0.05); border-color: rgba(0, 255, 255, 0.2); transform: translateY(-3px); }}
-        .affiliate-card i {{ font-size: 1.8rem; color: #0ff; }}
-        .affiliate-card span {{ color: var(--text-main); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }}
-        
-        .hero-img {{ width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid var(--brand-border); }}
-        .source-link {{ margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--brand-border); font-size: 0.85rem; color: var(--text-muted); text-align: center; }}
-        .source-link a {{ color: var(--brand-green); text-decoration: none; font-weight: 600; }}
-        
-        @media (max-width: 768px) {{
-            .hero-img {{ height: 220px; }}
-            .affiliate-grid {{ grid-template-columns: repeat(2, 1fr); }}
-        }}
-    </style>
 </head>
 <body class="article-page">
     {HEADER_HTML}
