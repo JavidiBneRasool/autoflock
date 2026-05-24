@@ -1,10 +1,11 @@
-import json, os, hashlib, zipfile, time, subprocess, shutil, urllib.parse, random, html
+import json, os, hashlib, zipfile, time, subprocess, shutil, urllib.parse, random, html, re
 from datetime import datetime
 
 HEADER_HTML = """
     <header class="ai-header">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+            @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
             .ai-header {
                 position: sticky; top: 0; z-index: 9999; width: 100%;
                 background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -230,6 +231,11 @@ def _normalize_autoflock_article(article):
             article[key] = value
     return article
 
+def _slugify(value):
+    import re
+    slug = re.sub(r"[^a-z0-9]+", "-", str(value).lower()).strip("-")
+    return slug[:100] or hashlib.md5(str(value).encode()).hexdigest()[:12]
+
 def _escape(value):
     return html.escape(str(value or ""), quote=True)
 
@@ -279,9 +285,10 @@ def run():
     with open(f"{SITE_DIR}/index.html", "w", encoding="utf-8") as f:
         f.write(index_html)
 
-    # Generate Article Pages
-    for a in current_articles:
-        filename = a.get("filename", f"{datetime.now().strftime('%Y%m%d%H%M%S')}.html")
+    # Generate Article Pages (Regenerate All)
+    for a in history:
+        filename = a.get("filename", f"{_slugify(a.get('headline', 'article'))}.html")
+        a["filename"] = filename
         content = _build_article_page(a)
         with open(f"{SITE_DIR}/{filename}", "w", encoding="utf-8") as f:
             f.write(content)
@@ -441,99 +448,27 @@ def _get_affiliate_block(category):
     c = category.lower()
     branding = "AI Infrastructure: Institutional-Grade Compute & Deployments"
     
-    # SVG Icons for brands
-    icons = {
-        "RunPod": "https://www.runpod.io/assets/images/logo.svg", # Placeholder or stylized
-        "Vast.ai": "https://vast.ai/static/media/logo.8d2f5a6a.svg",
-        "Railway": "https://railway.app/brand/logotype-dark.svg",
-        "DigitalOcean": "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg",
-        "Hostinger": "https://www.vectorlogo.zone/logos/hostinger/hostinger-icon.svg"
-    }
-    
     affiliates = [
-        ("RunPod", "https://www.runpod.io/?ref=autoflock", "https://cryptologos.cc/logos/render-rndr-logo.svg?v=024"), # Using stylized compute icons
-        ("Vast.ai", "https://vast.ai/?ref=autoflock", "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg"),
-        ("Railway", "https://railway.app?referralCode=autoflock", "https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg"),
-        ("DigitalOcean", "https://m.do.co/c/autoflock", "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-icon.svg"),
-        ("Hostinger", "https://www.hostinger.com/autoflock", "https://www.vectorlogo.zone/logos/hostinger/hostinger-icon.svg")
+        ("RunPod", "https://www.runpod.io/?ref=autoflock", "fa-solid fa-server"),
+        ("Vast.ai", "https://vast.ai/?ref=autoflock", "fa-solid fa-microchip"),
+        ("Railway", "https://railway.app?referralCode=autoflock", "fa-solid fa-train-subway"),
+        ("DigitalOcean", "https://m.do.co/c/autoflock", "fa-solid fa-droplet"),
+        ("Hostinger", "https://www.hostinger.com/autoflock", "fa-solid fa-hosting")
     ]
     
     links_html = "".join([f'''
-        <a href="{url}" target="_blank" class="affiliate-item">
-            <img src="{img}" alt="{name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2103/2103633.png'">
+        <a href="{url}" target="_blank" class="affiliate-card">
+            <i class="{icon}"></i>
             <span>{name}</span>
-        </a>''' for name, url, img in affiliates])
+        </a>''' for name, url, icon in affiliates])
     
     return f'''
     <div class="affiliate-container">
-        <h4>{branding}</h4>
+        <h4 class="affiliate-title">{branding}</h4>
         <div class="affiliate-grid">
             {links_html}
         </div>
     </div>
-    <style>
-        .affiliate-container {{
-            margin: 4rem 0;
-            padding: 2.5rem;
-            background: rgba(15, 15, 17, 0.6);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }}
-        .affiliate-container h4 {{
-            color: #fff;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }}
-        .affiliate-grid {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1.5rem;
-            align-items: center;
-        }}
-        .affiliate-item {{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            padding: 1rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }}
-        .affiliate-item:hover {{
-            background: rgba(0, 255, 255, 0.05);
-            border-color: rgba(0, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }}
-        .affiliate-item img {{
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-            filter: grayscale(1) brightness(1.5);
-            transition: filter 0.3s ease;
-        }}
-        .affiliate-item:hover img {{
-            filter: grayscale(0) brightness(1);
-        }}
-        .affiliate-item span {{
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }}
-        .affiliate-item:hover span {{
-            color: #fff;
-        }}
-    </style>
     '''
 
 def _get_adsense_tag():
@@ -546,9 +481,12 @@ def _get_adsense_tag():
 
 
 def _markdown_to_html(value):
+    if not value: return ""
+    # Ensure headers have a space after # for reliable parsing
+    value = re.sub(r'^(#+)([A-Za-z0-9])', r'\1 \2', str(value), flags=re.MULTILINE)
     try:
         import markdown
-        return markdown.markdown(value)
+        return markdown.markdown(value, extensions=['extra'])
     except Exception:
         paragraphs = [p.strip() for p in str(value).split("\n\n") if p.strip()]
         return "\n".join(f"<p>{html.escape(p)}</p>" for p in paragraphs)
@@ -563,17 +501,137 @@ def _build_article_page(a):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{a.get('headline', 'AutoFlock | AI Intelligence')}</title>
     <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     {a.get('meta', '')}
     {adsense}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .article-content {{ max-width: 850px; margin: 0 auto; padding: 2rem 1rem; }}
+        .article-body {{ 
+            font-size: 1.15rem; 
+            line-height: 1.8; 
+            color: var(--text-main); 
+        }}
+        .article-body h1, .article-body h2, .article-body h3 {{ 
+            font-family: 'Space Grotesk', sans-serif; 
+            color: #fff; 
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }}
+        .article-body p {{ margin-bottom: 1.5rem; text-align: left; }}
+        .article-body ul, .article-body ol {{ margin-bottom: 1.5rem; padding-left: 1.5rem; text-align: left; }}
+        .article-body li {{ margin-bottom: 0.5rem; }}
+        
+        .article-body table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }}
+        .article-body th, .article-body td {{
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }}
+        .article-body th {{
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-weight: 700;
+        }}
+        
+        /* Affiliate Grid Styles */
+        .affiliate-container {{
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 4rem 0;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }}
+        .affiliate-title {{
+            color: #fff;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.5px;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }}
+        .affiliate-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+        }}
+        .affiliate-card {{
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }}
+        .affiliate-card:hover {{
+            background: rgba(0, 255, 255, 0.05);
+            border-color: rgba(0, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }}
+        .affiliate-card i {{
+            font-size: 2rem;
+            color: #0ff;
+        }}
+        .affiliate-card span {{
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }}
+        
+        .hero-img {{
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border: 1px solid var(--brand-border);
+        }}
+        .source-link {{
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--brand-border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }}
+        .source-link a {{ color: var(--brand-green); text-decoration: none; font-weight: 600; }}
+        
+        @media (max-width: 768px) {{
+            .hero-img {{ height: 250px; }}
+            .affiliate-grid {{ grid-template-columns: repeat(2, 1fr); }}
+        }}
+    </style>
 </head>
-<body class="article-page">
-    <nav class="topbar"><div class="nav-inner"><a class="brand" href="/"><span class="bolt">⚡</span><span class="brand-word mono">AUTO<span>FLOCK</span></span><span class="live-pill mono">ANALYSIS</span></a></div></nav>
-    <main class="wrap">
-        <article class="glass-card article-shell">
-            <img src="{a['image_url']}" class="hero-img">
+<body class="article-page dark">
+    {HEADER_HTML}
+    <main class="article-content">
+        <article>
+            <img src="{a['image_url']}" class="hero-img" alt="{a['headline']}">
             <div class="article-body">
                 {body_html}
                 {affiliate_block}
@@ -583,6 +641,7 @@ def _build_article_page(a):
             </div>
         </article>
     </main>
+    {FOOTER_HTML}
 </body>
 </html>"""
 
