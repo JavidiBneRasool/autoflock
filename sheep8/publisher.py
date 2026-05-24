@@ -172,6 +172,7 @@ HEADER_HTML = """
                 <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
             </a>
             <div class="ai-nav-tools">
+                <a href="/about.html" class="lang-btn" style="text-decoration:none; display:flex; align-items:center;">About</a>
                 <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
                 <div class="lang-toggle" style="display:flex; gap:0.5rem;">
                     <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
@@ -362,6 +363,25 @@ def run():
     index_html = _build_index(history[:12])
     with open(f"{SITE_DIR}/index.html", "w", encoding="utf-8") as f:
         f.write(index_html)
+
+    # Generate About Page
+    try:
+        manifesto_path = os.path.join(os.path.dirname(PROJECT), "FlockHub", "manifesto.md")
+        if os.path.exists(manifesto_path):
+            with open(manifesto_path, "r") as f:
+                manifesto_md = f.read()
+            about_page = _build_article_page({
+                "headline": "About Our Intelligence Network",
+                "body": manifesto_md,
+                "category": "Manifesto",
+                "source": "FlockHub Agent",
+                "source_url": "/",
+                "image_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
+            })
+            with open(f"{SITE_DIR}/about.html", "w", encoding="utf-8") as f:
+                f.write(about_page)
+    except Exception as e:
+        print(f"⚠ About Page Error: {e}")
 
     # Generate Article Pages
     for a in history:
