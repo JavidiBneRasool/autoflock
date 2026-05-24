@@ -4,6 +4,7 @@ from datetime import datetime
 HEADER_HTML = """
     <header class="ai-header">
         <style>
+@font-face{{font-family:'JameelNoori';src:url('/fonts/JameelNooriNastaleeq.ttf') format('truetype')}}
             @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
             @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
             .ai-header {
@@ -42,6 +43,7 @@ HEADER_HTML = """
 FOOTER_HTML = """
     <footer class="ai-footer">
         <style>
+@font-face{{font-family:'JameelNoori';src:url('/fonts/JameelNooriNastaleeq.ttf') format('truetype')}}
             .ai-footer {
                 padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
                 font-family: 'Space Grotesk', sans-serif; text-align: center;
@@ -85,7 +87,8 @@ body {
     radial-gradient(circle at 88% 8%, rgba(168,85,247,.10), transparent 30rem),
     var(--brand-black);
   color: var(--text-main);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;}
+body.ur {{ font-family: "JameelNoori", "Inter", sans-serif; direction: rtl; line-height: 1.9; }}
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
@@ -508,6 +511,7 @@ def _build_article_page(a):
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
+@font-face{{font-family:'JameelNoori';src:url('/fonts/JameelNooriNastaleeq.ttf') format('truetype')}}
         .article-content {{ max-width: 850px; margin: 0 auto; padding: 2rem 1rem; }}
         .article-body {{ 
             font-size: 1.15rem; 
