@@ -1,5 +1,6 @@
+import os
 # SHEEP 8 - Robust Cloudflare Pages Deployer
-import json, os, hashlib, requests, time, zipfile
+from config_loader import get_credential, get_flock_config, os, hashlib, requests, time, zipfile
 from datetime import datetime
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,8 +47,7 @@ def run():
 
     # Load config
     try:
-        with open(f"{PROJECT}/config/cloudflare.json") as f:
-            cf = json.load(f)
+        cf = get_flock_config('autoflock')
     except:
         print("🐑 SHEEP 8: Missing Cloudflare config!"); return None
         

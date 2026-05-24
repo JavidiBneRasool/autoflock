@@ -1,5 +1,6 @@
+import os
 # Cleanup - Delete old Cloudflare deployments
-import json, os, requests
+from config_loader import get_credential, get_flock_config, os, requests
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = f"{PROJECT}/output"
@@ -7,8 +8,7 @@ OUTPUT = f"{PROJECT}/output"
 def run():
     print("🐑 Cleanup: Deleting old deployments...")
     try:
-        with open(f"{PROJECT}/config/cloudflare.json") as f:
-            cf = json.load(f)
+        cf = get_flock_config('autoflock')
         account_id = cf["account_id"]
         token = cf["api_token"]
         headers = {"Authorization": f"Bearer {token}"}

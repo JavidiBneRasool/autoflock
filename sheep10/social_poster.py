@@ -1,5 +1,10 @@
+import json
+import time
+import requests
+import random
+import re
+import os
 # SHEEP 10 - Multi-Platform Social Poster (Telegram + Facebook)
-import json, os, requests, time, random, re
 from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,8 +15,9 @@ BASE_URL = "https://autoflock.cutbar.in"
 TRACKING_PARAMS = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid", "ref"}
 
 def load_config():
-    with open(f"{PROJECT}/config/social.json") as f:
-        return json.load(f)
+    import sys; sys.path.insert(0, "..")
+    from config_loader import get_flock_config
+    return get_flock_config("autoflock")
 
 def _canonical_url(url):
     if not url: return ""
