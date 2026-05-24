@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +9,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="topbar">
-        <div class="nav-inner">
-            <a class="brand" href="/">
-                <span class="bolt">⚡</span>
-                <span class="brand-word mono">AUTO<span>FLOCK</span></span>
-                <span class="live-pill mono">v2.1 LIVE</span>
+    
+    <header class="ai-header">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+            @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+            .ai-header {
+                position: sticky; top: 0; z-index: 9999; width: 100%;
+                background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+                font-family: 'Space Grotesk', sans-serif;
+            }
+            .ai-header-content {
+                max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.5rem;
+                display: flex; justify-content: space-between; align-items: center;
+            }
+            .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
+            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+            .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
+            .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+            .ai-nav-tools { display: flex; align-items: center; gap: 1rem; }
+            .theme-btn, .lang-btn {
+                background: rgba(0, 255, 255, 0.05); color: #fff;
+                border: 1px solid rgba(0, 255, 255, 0.1); padding: 0.4rem 0.7rem; border-radius: 8px; cursor: pointer; font-size: 0.75rem;
+                transition: all 0.2s ease;
+            }
+            .lang-btn.active { border-color: #0ff; color: #0ff; }
+            @media (max-width: 640px) { .ai-tagline { display: none; } }
+        </style>
+        <div class="ai-header-content">
+            <a href="/" class="ai-logo">
+                <div class="ai-logo-text">Auto <span>Flock</span></div>
+                <div class="ai-tagline">Autonomous Journalism for the Agentic Era</div>
             </a>
-            <div class="nav-links mono">
-                <a class="active" href="/">Dashboard</a>
-                <a href="#signals">Signals</a>
-                <a href="#research">Research</a>
-                <a href="#terminal">Terminal</a>
-            </div>
-            <div class="search-row">
-                <input class="search-box" type="search" placeholder="Search intelligence..." oninput="filterCards(this.value)">
-                <button class="connect-btn">Connect Wallet</button>
+            <div class="ai-nav-tools">
+                <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+                <div class="lang-toggle" style="display:flex; gap:0.5rem;">
+                    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" id="btn-ur" onclick="setLang('ur')">UR</button>
+                </div>
             </div>
         </div>
-    </nav>
+    </header>
+
 
     <header class="wrap hero">
         <div class="hero-grid">
@@ -37,11 +61,10 @@
                     <span class="badge opportunity">OPPORTUNITY</span>
                     <span class="meta mono">AI RESEARCH • LIVE</span>
                 </div>
-                <h1>📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy</h1>
-                <p class="summary">Auto Flock Intelligence: 📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal OpenAI is named a leader in the 2026 Gartner Magic Quadrant for Ent...</p>
+                <h1 data-trans="📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy" data-original="📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy">📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy</h1>
+                <p class="summary" data-trans="Auto Flock Intelligence: 📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal OpenAI is named a leader in the 2026 Gartner Magic Quadrant for Ent..." data-original="Auto Flock Intelligence: 📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal OpenAI is named a leader in the 2026 Gartner Magic Quadrant for Ent...">Auto Flock Intelligence: 📈 OPPORTUNITY: OpenAI named a Leader in enterprise coding agents by Gartner — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal OpenAI is named a leader in the 2026 Gartner Magic Quadrant for Ent...</p>
                 <div class="feature-foot">
                     <div style="display:flex;align-items:center;gap:10px">
-                        <span class="source-dot"></span>
                         <span class="mono">OpenAI News</span>
                     </div>
                     <span class="read-link mono">Read Analysis →</span>
@@ -58,21 +81,13 @@
                 </section>
                 <section class="glass-card mini-signal">
                     <span class="badge warning">WARNING</span>
-                    <h3>🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report</h3>
-                    <p class="summary" style="font-size:.9rem">Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst...</p>
+                    <h3 data-trans="🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report" data-original="🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report">🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report</h3>
+                    <p class="summary" data-trans="Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst..." data-original="Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst..." style="font-size:.9rem">Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst...</p>
                     <span class="meta mono">OpenAI News</span>
                 </section>
             </aside>
         </div>
     </header>
-
-    <section class="wrap tabs mono">
-        <button class="tab active" onclick="filterCards('')">All Feeds</button>
-        <button class="tab" onclick="filterCards('warning')">Warnings</button>
-        <button class="tab" onclick="filterCards('opportunity')">Opportunities</button>
-        <button class="tab" onclick="filterCards('terminal')">Terminal/Dev</button>
-        <button class="tab" onclick="filterCards('security')">Automation/Sec</button>
-    </section>
 
     <main class="wrap" id="signals">
         <div class="feed-grid" id="feedGrid">
@@ -83,8 +98,8 @@
                         <span class="badge warning">WARNING</span>
                         <span class="meta mono">RISK REPORT</span>
                     </div>
-                    <h2>🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report</h2>
-                    <p>Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal...</p>
+                    <h2 data-trans="🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report" data-original="🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report">🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report</h2>
+                    <p data-trans="Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal..." data-original="Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal...">Auto Flock Intelligence: 🚨 WARNING: How Virgin Atlantic ships faster with Codex — Risk Report Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>OpenAI News</span>
@@ -97,8 +112,8 @@
                         <span class="badge signal">SIGNAL</span>
                         <span class="meta mono">ANALYSIS</span>
                     </div>
-                    <h2>🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis</h2>
-                    <p>Auto Flock Intelligence: 🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Sig...</p>
+                    <h2 data-trans="🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis" data-original="🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis">🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis</h2>
+                    <p data-trans="Auto Flock Intelligence: 🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Sig..." data-original="Auto Flock Intelligence: 🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Sig...">Auto Flock Intelligence: 🔮 SIGNAL: Catch up on the Dialogues stage at Google I/O 2026. — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Sig...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>Google AI Blog</span>
@@ -111,8 +126,8 @@
                         <span class="badge opportunity">OPPORTUNITY</span>
                         <span class="meta mono">STRATEGY</span>
                     </div>
-                    <h2>📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy</h2>
-                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intel...</p>
+                    <h2 data-trans="📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy" data-original="📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy">📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy</h2>
+                    <p data-trans="Auto Flock Intelligence: 📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intel..." data-original="Auto Flock Intelligence: 📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intel...">Auto Flock Intelligence: 📈 OPPORTUNITY: How AI Mode is changing the way people search in the U.S. — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intel...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>Google AI Blog</span>
@@ -125,8 +140,8 @@
                         <span class="badge warning">WARNING</span>
                         <span class="meta mono">RISK REPORT</span>
                     </div>
-                    <h2>🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report</h2>
-                    <p>Auto Flock Intelligence: 🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
+                    <h2 data-trans="🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report" data-original="🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report">🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report</h2>
+                    <p data-trans="Auto Flock Intelligence: 🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---..." data-original="Auto Flock Intelligence: 🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...">Auto Flock Intelligence: 🚨 WARNING: Towards Speed-of-Light Text Generation with Nemotron-Labs Diffusion La — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>Hugging Face Blog</span>
@@ -139,8 +154,8 @@
                         <span class="badge terminal">TERMINAL</span>
                         <span class="meta mono">DEV</span>
                     </div>
-                    <h2>🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis</h2>
-                    <p>Auto Flock Intelligence: 🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...</p>
+                    <h2 data-trans="🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis" data-original="🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis">🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis</h2>
+                    <p data-trans="Auto Flock Intelligence: 🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T..." data-original="Auto Flock Intelligence: 🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...">Auto Flock Intelligence: 🔮 SIGNAL: GitHub recognized as a Leader in the Gartner® Magic Quadrant™ for Ente — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>GitHub Blog AI</span>
@@ -153,8 +168,8 @@
                         <span class="badge opportunity">OPPORTUNITY</span>
                         <span class="meta mono">STRATEGY</span>
                     </div>
-                    <h2>📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy</h2>
-                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy Auto Flock Senior Analyst | May 23, 2026 --...</p>
+                    <h2 data-trans="📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy" data-original="📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy">📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy</h2>
+                    <p data-trans="Auto Flock Intelligence: 📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy Auto Flock Senior Analyst | May 23, 2026 --..." data-original="Auto Flock Intelligence: 📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy Auto Flock Senior Analyst | May 23, 2026 --...">Auto Flock Intelligence: 📈 OPPORTUNITY: Synthesize Realistic 3D Medical Images at Scale to Ship Pre‑Trained Mo — Strategy Auto Flock Senior Analyst | May 23, 2026 --...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>NVIDIA Technical Blog</span>
@@ -167,8 +182,8 @@
                         <span class="badge warning">WARNING</span>
                         <span class="meta mono">RISK REPORT</span>
                     </div>
-                    <h2>🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report</h2>
-                    <p>Auto Flock Intelligence: 🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
+                    <h2 data-trans="🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report" data-original="🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report">🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report</h2>
+                    <p data-trans="Auto Flock Intelligence: 🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---..." data-original="Auto Flock Intelligence: 🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...">Auto Flock Intelligence: 🚨 WARNING: Specialization Beats Scale: A Strategic Variable Most AI Procurement D — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>Hugging Face Blog</span>
@@ -181,8 +196,8 @@
                         <span class="badge signal">SIGNAL</span>
                         <span class="meta mono">ANALYSIS</span>
                     </div>
-                    <h2>🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis</h2>
-                    <p>Auto Flock Intelligence: 🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal In this po...</p>
+                    <h2 data-trans="🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis" data-original="🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis">🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis</h2>
+                    <p data-trans="Auto Flock Intelligence: 🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal In this po..." data-original="Auto Flock Intelligence: 🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal In this po...">Auto Flock Intelligence: 🔮 SIGNAL: Amazon Nova Act is now HIPAA eligible — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Intelligence Signal In this po...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>AWS Machine Learning</span>
@@ -195,8 +210,8 @@
                         <span class="badge opportunity">OPPORTUNITY</span>
                         <span class="meta mono">STRATEGY</span>
                     </div>
-                    <h2>📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy</h2>
-                    <p>Auto Flock Intelligence: 📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Inte...</p>
+                    <h2 data-trans="📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy" data-original="📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy">📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy</h2>
+                    <p data-trans="Auto Flock Intelligence: 📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Inte..." data-original="Auto Flock Intelligence: 📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Inte...">Auto Flock Intelligence: 📈 OPPORTUNITY: Intelligent radiology workflow optimization with AI agents — Strategy Auto Flock Senior Analyst | May 23, 2026 --- 🎯 The Inte...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>AWS Machine Learning</span>
@@ -209,8 +224,8 @@
                         <span class="badge warning">WARNING</span>
                         <span class="meta mono">RISK REPORT</span>
                     </div>
-                    <h2>🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent  — Risk Report</h2>
-                    <p>Auto Flock Intelligence: 🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
+                    <h2 data-trans="🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent  — Risk Report" data-original="🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent  — Risk Report">🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent  — Risk Report</h2>
+                    <p data-trans="Auto Flock Intelligence: 🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---..." data-original="Auto Flock Intelligence: 🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...">Auto Flock Intelligence: 🚨 WARNING: Automating and Optimizing Financial Signal Discovery with Multi-Agent — Risk Report Auto Flock Senior Analyst | May 23, 2026 ---...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>NVIDIA Technical Blog</span>
@@ -223,8 +238,8 @@
                         <span class="badge terminal">TERMINAL</span>
                         <span class="meta mono">DEV</span>
                     </div>
-                    <h2>🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis</h2>
-                    <p>Auto Flock Intelligence: 🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...</p>
+                    <h2 data-trans="🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis" data-original="🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis">🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis</h2>
+                    <p data-trans="Auto Flock Intelligence: 🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T..." data-original="Auto Flock Intelligence: 🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...">Auto Flock Intelligence: 🔮 SIGNAL: From pixels to characters: The engineering behind GitHub Copilot CLI’s — Analysis Auto Flock Senior Analyst | May 23, 2026 --- 🎯 T...</p>
                 </div>
                 <div class="card-foot mono">
                     <span>GitHub Engineering</span>
@@ -234,30 +249,99 @@
         </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="wrap">
-            <div class="footer-grid">
-                <div>
-                    <span class="brand-word mono">AUTO<span>FLOCK</span></span>
-                    <p>Autonomous Infrastructure for the AI Age. Real-time intelligence aggregation and risk analysis.</p>
-                </div>
-                <div><h4 class="mono">Platform</h4><ul><li>API Documentation</li><li>System Status</li><li>Pricing</li></ul></div>
-                <div><h4 class="mono">Intelligence</h4><ul><li>Threat Reports</li><li>Market Signals</li><li>Research Papers</li></ul></div>
-                <div><h4 class="mono">Newsletter</h4><div class="newsletter"><input type="email" placeholder="agent@auto.flock"><button>→</button></div></div>
-            </div>
-            <div class="footer-bottom mono">
-                <span>© 2026 AI Flock Empire — Auto Flock Network</span>
-                <span>SYSTEM STATUS: OPTIMAL • PROTOCOL: X-7 NEURAL</span>
-            </div>
-        </div>
+    
+    <footer class="ai-footer">
+        <style>
+            .ai-footer {
+                padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
+                font-family: 'Space Grotesk', sans-serif; text-align: center;
+            }
+            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
+            .ai-footer-logo span { color: #0ff; }
+            .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
+            .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
+        </style>
+        <div class="ai-footer-logo">Auto <span>Flock</span></div>
+        <p class="ai-footer-text" data-trans="footer_copy">© 2026 AI Flock Empire — Auto Flock Network | Autonomous Infrastructure</p>
+        <div class="ai-footer-bottom">System Status: Optimal • Protocol: X-7 Neural</div>
     </footer>
+
+    
     <script>
-      function filterCards(query) {
-        const q = String(query || '').toLowerCase();
-        document.querySelectorAll('.feed-card').forEach(card => {
-          card.style.display = card.innerText.toLowerCase().includes(q) ? '' : 'none';
-        });
-      }
+        let TRANSLATIONS = {};
+        fetch('/translations.json').then(r => r.json()).catch(()=>{}).then(data => { if(data) TRANSLATIONS = data; applyLang(); });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.getElementById('themeToggle').innerText = isLight ? '☀️' : '🌙';
+        }
+
+        async function applyLang() {
+            const lang = localStorage.getItem('lang') || 'en';
+            document.body.classList.toggle('ur', lang === 'ur');
+            const btnEn = document.getElementById('btn-en');
+            const btnUr = document.getElementById('btn-ur');
+            if(btnEn) btnEn.classList.toggle('active', lang === 'en');
+            if(btnUr) btnUr.classList.toggle('active', lang === 'ur');
+            
+            if(lang === 'ur') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+
+            const nodes = document.querySelectorAll('[data-trans]');
+            if (lang === 'en') {
+                nodes.forEach(el => {
+                    if (el.hasAttribute('data-original')) {
+                        el.innerHTML = el.getAttribute('data-original');
+                    }
+                });
+                return;
+            }
+
+            for(let el of nodes) {
+                const key = el.getAttribute('data-trans');
+                const originalText = el.getAttribute('data-original') || el.innerText;
+                
+                if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+                    el.innerHTML = TRANSLATIONS[lang][key];
+                } else if (originalText && originalText.length > 1) {
+                    try {
+                        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t&q=${encodeURIComponent(originalText)}`;
+                        const res = await fetch(url);
+                        const data = await res.json();
+                        let translated = '';
+                        if(data && data[0]) {
+                            data[0].forEach(part => { if(part[0]) translated += part[0]; });
+                        }
+                        if(translated) {
+                            if(!TRANSLATIONS[lang]) TRANSLATIONS[lang] = {};
+                            TRANSLATIONS[lang][key] = translated;
+                            el.innerHTML = translated;
+                        }
+                    } catch(e) {
+                        el.innerHTML = originalText;
+                    }
+                }
+            }
+        }
+
+        function setLang(lang) {
+            localStorage.setItem('lang', lang);
+            applyLang();
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').innerText = '☀️';
+            }
+            applyLang();
+        }
     </script>
+
 </body>
 </html>
