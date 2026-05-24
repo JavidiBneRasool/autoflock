@@ -18,7 +18,7 @@ HEADER_HTML = """
                 display: flex; justify-content: space-between; align-items: center;
             }
             .ai-logo { text-decoration: none; display: flex; flex-direction: column; }
-            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+            .ai-logo-text { font-size: 1.25rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: -0.5px; }
             .ai-logo-text span { color: #0ff; text-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
             .ai-tagline { font-size: 0.65rem; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
             .ai-status-pill {
@@ -48,7 +48,7 @@ FOOTER_HTML = """
                 padding: 4rem 1.5rem; background: #050505; border-top: 1px solid rgba(255, 255, 255, 0.05);
                 font-family: 'Space Grotesk', sans-serif; text-align: center;
             }
-            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 0.5rem; }
+            .ai-footer-logo { font-size: 1.1rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; margin-bottom: 0.5rem; }
             .ai-footer-logo span { color: #0ff; }
             .ai-footer-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; line-height: 1.6; }
             .ai-footer-bottom { font-size: 0.65rem; color: rgba(255, 255, 255, 0.15); text-transform: uppercase; letter-spacing: 2px; }
@@ -106,7 +106,7 @@ a { color: inherit; text-decoration: none; }
   width: 32px; height: 32px; border-radius: 6px; display: grid; place-items: center;
   background: var(--brand-green); color: #020403; font-weight: 900;
 }
-.brand-word { font-size: 1.25rem; font-weight: 800; letter-spacing: -.04em; }
+.brand-word { font-size: 1.15rem; font-weight: 800; }
 .brand-word span { color: var(--brand-green); }
 .live-pill {
   padding: 3px 8px; border-radius: 999px;
@@ -154,11 +154,11 @@ a { color: inherit; text-decoration: none; }
 .badge.terminal { color: var(--brand-blue); background: rgba(59,130,246,.12); }
 .meta { color: #6b7280; font-size: .72rem; font-weight: 700; }
 .featured h1 {
-  max-width: 780px; margin: 0 0 18px; font-size: clamp(2rem, 5vw, 4rem);
+  max-width: 780px; margin: 0 0 18px; font-size: 2.2rem;
   line-height: 1.02; letter-spacing: -.055em;
 }
 .featured:hover h1 { color: var(--brand-green); }
-.summary { max-width: 660px; color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+.summary { max-width: 660px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 .feature-foot {
   margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--brand-border);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -197,8 +197,8 @@ a { color: inherit; text-decoration: none; }
 .article-page .wrap { padding: 44px 0 72px; }
 .article-shell { border-radius: 18px; padding: clamp(22px, 5vw, 46px); }
 .hero-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 14px; border: 1px solid var(--brand-border); margin-bottom: 28px; }
-.article-body { color: var(--text-main); font-size: clamp(1rem, 2.4vw, 1.18rem); line-height: 1.86; }
-.article-body h1, .article-body h2, .article-body h3 { color: #fff; letter-spacing: -.025em; }
+.article-body { color: var(--text-main); font-size: 1.1rem; line-height: 1.7; }
+.article-body h1, .article-body h2, .article-body h3 { color: var(--text-main); }
 .article-body a { color: var(--brand-green); }
 .source-link { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--brand-border); color: var(--text-muted); }
 ::-webkit-scrollbar { width: 8px; }
