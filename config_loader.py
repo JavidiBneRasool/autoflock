@@ -81,20 +81,29 @@ class CredentialLoader:
     def get_by_flock(self, flock: str) -> Dict[str, Any]:
         """
         Get all credentials for a specific flock.
+        Flattens sub-dictionaries and strips prefixes for backward compatibility.
         
         Args:
-            flock: Flock name (e.g., 'newshourflock', 'marketflock')
+            flock: Flock name (e.g., 'newshour-flock', 'marketflock')
         
         Returns:
-            Dict of credentials for that flock
+            Flattened dict of credentials for that flock
         """
         prefix = f"{flock}_"
-        filtered = {
-            k: v for k, v in self._cache.items()
-            if k.startswith(prefix)
-        }
-        self._log_access("GET_BY_FLOCK", flock, f"found={len(filtered)}")
-        return filtered
+        result = {}
+        
+        for k, v in self._cache.items():
+            if k.startswith(prefix):
+                # If value is a dict (like the contents of a json file), flatten it
+                if isinstance(v, dict):
+                    result.update(v)
+                else:
+                    # Otherwise strip prefix and add
+                    clean_key = k[len(prefix):]
+                    result[clean_key] = v
+                    
+        self._log_access("GET_BY_FLOCK", flock, f"found={len(result)}")
+        return result
     
     def get_credential(self, key: str, flock: Optional[str] = None) -> Optional[str]:
         """

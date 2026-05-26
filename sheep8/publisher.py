@@ -446,6 +446,9 @@ def _build_index(latest):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTO FLOCK | AI Intelligence Network</title>
+    <meta name="google-adsense-account" content="ca-pub-1473583694933213">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473583694933213"
+     crossorigin="anonymous"></script>
     <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -554,6 +557,9 @@ def _build_article_page(a):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{a.get('headline', 'AutoFlock | AI Intelligence')}</title>
+    <meta name="google-adsense-account" content="ca-pub-1473583694933213">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473583694933213"
+     crossorigin="anonymous"></script>
     <meta name="google-site-verification" content="Dthc_OiAqsG2NxrZXLE_gE84PLsD4_fLmc71KGGgKQI" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -565,6 +571,18 @@ def _build_article_page(a):
             <img src="{a['image_url']}" class="hero-img" alt="{a['headline']}">
             <div class="article-body">
                 {translated_body}
+                
+                <!-- Google AdSense -->
+                <ins class="adsbygoogle"
+                     style="display:block; text-align:center;"
+                     data-ad-layout="in-article"
+                     data-ad-format="fluid"
+                     data-ad-client="ca-pub-1473583694933213"
+                     data-ad-slot="5973687452"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
                 {affiliate_block}
             </div>
             <div class="source-link">
