@@ -2,6 +2,8 @@
 import json, os, time, urllib.request, urllib.error
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import sys
+sys.path.insert(0, PROJECT)
 OUTPUT = f"{PROJECT}/output"
 KEY_FILE = f"{PROJECT}/config/google_indexing_key.json"
 BASE_URL = "https://autoflock.cutbar.in"
