@@ -15,7 +15,7 @@ BASE_URL = "https://autoflock.cutbar.in"
 TRACKING_PARAMS = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid", "ref"}
 
 def load_config():
-    import sys; sys.path.insert(0, "..")
+    import sys; sys.path.insert(0, PROJECT)
     from config_loader import get_flock_config
     return get_flock_config("autoflock")
 

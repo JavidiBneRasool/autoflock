@@ -358,7 +358,7 @@ def run():
     with open(HISTORY_FILE, "w") as f:
         json.dump(history, f, indent=2)
 
-    shutil.copy("/data/data/com.termux/files/home/projects/media/shared/styles/global.css", f"{SITE_DIR}/style.css")
+    shutil.copy(f"{os.path.dirname(PROJECT)}/shared/styles/global.css", f"{SITE_DIR}/style.css")
 
     # Generate Index Page
     index_html = _build_index(history[:12])
@@ -580,7 +580,7 @@ def _build_article_page(a):
                      data-ad-client="ca-pub-1473583694933213"
                      data-ad-slot="5973687452"></ins>
                 <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
+                     (adsbygoogle = window.adsbygoogle || []).push({{}});
                 </script>
 
                 {affiliate_block}

@@ -35,6 +35,7 @@ print("""
 ╚════════════════════════════════╝
 """)
 
+failed = False
 for name, script in SHEEP:
     print(f"\n{'='*40}")
     print(f"RUNNING {name}...")
@@ -44,5 +45,8 @@ for name, script in SHEEP:
     print(result.stdout)
     if result.returncode != 0:
         print(f"⚠ {name} ERROR: {result.stderr}")
+        failed = True
 
 print("\n✅ ORCHESTRATOR FINISHED")
+if failed:
+    sys.exit(1)
