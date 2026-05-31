@@ -1,6 +1,7 @@
-import os
+import os, sys
 # Cleanup - Delete old Cloudflare deployments
-from config_loader import get_credential, get_flock_config, os, requests
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config_loader import get_credential, get_flock_config, requests
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = f"{PROJECT}/output"

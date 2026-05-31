@@ -47,11 +47,15 @@ def run():
     recent_urls = _recent_urls()
     submit_indexnow(recent_urls)
 
-    if not os.path.exists(KEY_FILE):
-        print("   ! Google Indexing key not found. Skipping API.")
+    # Load credentials from Vault
+    from config_loader import get_credential
+    info = get_credential("google_indexing_key", flock="autoflock")
+    
+    if not info:
+        print("   ! Google Indexing key not found in Vault. Skipping API.")
     else:
         try:
-            _run_api_indexing(recent_urls)
+            _run_api_indexing(recent_urls, info)
         except Exception as e:
             print(f"   ! Indexing API failed: {e} (Continuing with other signals)")
 
@@ -69,7 +73,7 @@ def _recent_urls():
             urls.append(f"{BASE_URL}/{filename}")
     return urls
 
-def _run_api_indexing(urls):
+def _run_api_indexing(urls, info):
     if not urls:
         print("   ! No recent URLs available for Google Indexing API.")
         return
@@ -80,7 +84,7 @@ def _run_api_indexing(urls):
         print(f"   ! google-auth missing. Install google-auth to enable GSC indexing: {e}")
         return
     scopes = ['https://www.googleapis.com/auth/indexing']
-    credentials = service_account.Credentials.from_service_account_file(KEY_FILE, scopes=scopes)
+    credentials = service_account.Credentials.from_service_account_info(info, scopes=scopes)
     credentials.refresh(Request())
     access_token = credentials.token
     
