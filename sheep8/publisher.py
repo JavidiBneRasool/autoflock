@@ -52,7 +52,7 @@ body {
 
 /* Force Nastaleeq for Urdu */
 [dir="rtl"], body.ur, body.ur * { 
-  font-family: 'JameelNoori', serif !important; 
+  font-family: 'Jameel Noori Nastaleeq', serif !important; 
   line-height: 2 !important;
   text-align: right !important;
 }
