@@ -19,7 +19,6 @@
   <url><loc>https://autoflock.cutbar.in/turning-cloudflare-s-threat-indicators-into-real-time-waf-rules.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/voidzero-is-joining-cloudflare.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/supporting-europe-s-work-in-ensuring-a-trustworthy-ai-ecosystem.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/run-local-ai-agents-with-faster-models-and-multi-node-clustering-on-nv.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/shared-dictionaries-compression-that-keeps-up-with-the-agentic-web.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/singapore-develops-asia-s-first-ai-based-mobile-app-for-shark-and-ray.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/stop-hand-tuning-kernels-how-neuron-agentic-development-accelerates-a.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -44,6 +43,7 @@
   <url><loc>https://autoflock.cutbar.in/openai-frontier-models-and-codex-are-now-available-on-aws.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/run-diffusiongemma-on-nvidia-for-developer-ready-high-throughput-text.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/optimize-blueprint-extraction-accuracy-in-amazon-bedrock-data-automati.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/run-local-ai-agents-with-faster-models-and-multi-node-clustering-on-nv.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/redirects-for-ai-training-enforces-canonical-content.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/reachy-mini-goes-fully-local.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/profiling-in-pytorch-part-1-a-beginner-s-guide-to-torch-profiler.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -90,6 +90,7 @@
   <url><loc>https://autoflock.cutbar.in/how-an-agent-built-a-3d-paris-gallery-by-chaining-two-hugging-face-spa.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/how-cloudflare-responded-to-the-copy-fail-linux-vulnerability.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/how-wasmer-used-codex-to-build-a-node-js-runtime-for-the-edge.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/github-recognized-as-a-leader-in-the-gartner-magic-quadrant-for-ente.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/google-june-2026-android-update-patches-124-flaws-one-actively-exploi.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/how-to-post-train-autonomous-vehicle-models-in-closed-loop-with-nvidia.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/how-to-fine-tune-nemotron-3-5-asr-for-your-language-domain-or-accent.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -102,7 +103,6 @@
   <url><loc>https://autoflock.cutbar.in/from-one-off-prompts-to-workflows-how-to-use-custom-agents-in-github.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/github-copilot-cli-for-beginners-interactive-v-non-interactive-mode.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/from-data-to-decisions-how-lseg-is-scaling-trusted-ai.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/github-recognized-as-a-leader-in-the-gartner-magic-quadrant-for-ente.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/from-latency-to-instant-modernizing-github-issues-navigation-performa.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/gamaredon-exploits-winrar-to-deliver-gammaworm-and-gammasteel-against.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/fluttershell-backdoor-spreads-to-macos-via-malicious-google-and-youtub.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
