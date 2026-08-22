@@ -24,6 +24,7 @@
   <url><loc>https://autoflock.cutbar.in/the-latest-ai-news-we-announced-in-may-2026.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/the-open-source-community-is-backing-openenv-for-agentic-rl.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/threatsday-bulletin-ai-agents-gone-wrong-sketchy-c2-tools-clickfix.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/redirects-for-ai-training-enforces-canonical-content.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/securing-non-human-identities-automated-revocation-oauth-and-scoped.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/shipping-a-trillion-parameters-with-a-hub-bucket-delta-weight-sync-in.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/the-ai-engineering-stack-we-built-internally.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -42,7 +43,6 @@
   <url><loc>https://autoflock.cutbar.in/shared-dictionaries-compression-that-keeps-up-with-the-agentic-web.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/task-seeded-synthetic-q-a-generation-for-nemotron-pretraining.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/run-local-ai-agents-with-faster-models-and-multi-node-clustering-on-nv.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/redirects-for-ai-training-enforces-canonical-content.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/nvidia-dsx-os-delivers-open-modular-software-for-operating-ai-factori.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/optimize-blueprint-extraction-accuracy-in-amazon-bedrock-data-automati.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/openai-frontier-models-and-codex-are-now-available-on-aws.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -117,6 +117,7 @@
   <url><loc>https://autoflock.cutbar.in/fake-sites-mimicking-open-source-tools-rank-high-on-google-to-deliver.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/extending-mcp-support-for-amazon-bedrock-agentcore-gateway.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/evaluate-clinical-asr-models-faster-with-agent-skills-and-nvidia-nemot.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/catch-up-on-12-major-i-o-2026-moments.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/delivering-lifecycle-control-for-ai-infrastructure-at-scale-with-nvidi.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/cloudflare-targets-2029-for-full-post-quantum-security.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/cloudflare-client-side-security-smarter-detection-now-open-to-everyo.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -132,7 +133,6 @@
   <url><loc>https://autoflock.cutbar.in/china-linked-ta4922-expands-phishing-attacks-to-uk-germany-italy-an.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/deploy-agentic-ready-ai-at-the-edge-with-memory-efficiency-in-nvidia-j.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/designing-production-ready-battery-energy-storage-systems-for-ai-facto.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/catch-up-on-12-major-i-o-2026-moments.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/bbva-puts-ai-at-the-core-of-banking-with-openai.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/ai-security-for-apps-is-now-generally-available.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/amazon-will-show-ai-product-images-when-you-search-for-some-reason.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -150,6 +150,7 @@
   <url><loc>https://autoflock.cutbar.in/build-an-agentic-incident-triage-assistant-with-amazon-quick-and-new-r.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/beyond-llms-why-scalable-enterprise-ai-adoption-depends-on-agent-logi.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/build-personal-ai-agents-on-windows-pcs-with-new-tools-from-microsoft.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://autoflock.cutbar.in/agents-can-now-create-cloudflare-accounts-buy-domains-and-deploy.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/a-new-experiment-brings-better-group-meetings-to-google-beam.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/agent-driven-development-in-copilot-applied-science.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/about.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -159,7 +160,6 @@
   <url><loc>https://autoflock.cutbar.in/advancing-youth-safety-and-opportunity-through-global-leadership.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/advancing-ai-infrastructure-for-agentic-ai-with-nvidia-doca-in-silicon.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/5-ways-google-search-can-level-up-your-thrift-and-vintage-shopping.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://autoflock.cutbar.in/agents-can-now-create-cloudflare-accounts-buy-domains-and-deploy.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/a-conversation-with-kevin-scott-what-s-next-in-ai.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/agent-pull-requests-are-everywhere-here-s-how-to-review-them.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://autoflock.cutbar.in/9-demos-of-gemini-omni-and-gemini-3-5-in-action.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
